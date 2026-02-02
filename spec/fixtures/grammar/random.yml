@@ -48,3 +48,166 @@
     印证: chứng minh
     。: "."
   expected: xuất hiện của bạn khiến câu nói này đã đạt được chứng minh mạnh mẽ nhất .
+- id: random_world_is_book
+  desc: 'Random: The whole world is just a book'
+  input: 整个世界都只是一本书……那自己所经历的一切，到底是真实还是虚幻？
+  ltp:
+    cws:
+    - 整个
+    - 世界
+    - 都
+    - 只
+    - 是
+    - 一
+    - 本
+    - 书
+    - ……
+    - 那
+    - 自己
+    - 所
+    - 经历
+    - 的
+    - 一切
+    - ，
+    - 到底
+    - 是
+    - 真实
+    - 还是
+    - 虚幻
+    - ？
+    pos:
+    - b
+    - n
+    - d
+    - d
+    - v
+    - m
+    - q
+    - n
+    - wp
+    - c
+    - r
+    - u
+    - v
+    - u
+    - r
+    - wp
+    - d
+    - v
+    - a
+    - c
+    - a
+    - wp
+  dict:
+    整个: cả
+    世界: thế giới
+    都: đều
+    只: chỉ
+    是: là
+    一: một
+    本: cuốn
+    书: sách
+    ……: "..."
+    那: vậy thì
+    自己: bản thân
+    所: ""
+    经历: trải qua
+    的: ""
+    一切: mọi thứ
+    ，: ","
+    到底: rốt cuộc
+    真实: thực
+    还是: hay
+    虚幻: ảo
+    ？: "?"
+  expected: cả thế giới đều chỉ là một cuốn sách... vậy thì mọi thứ bản thân trải qua, rốt cuộc là thực hay ảo?
+- id: ziji_with_noun
+  desc: 'Ziji combined with noun: should be chính mình'
+  input: 不应该放弃自己的梦想。
+  ltp:
+    cws:
+    - 不
+    - 应该
+    - 放弃
+    - 自己
+    - 的
+    - 梦想
+    - 。
+    pos:
+    - d
+    - v
+    - v
+    - r
+    - u
+    - n
+    - wp
+  dict:
+    不: không
+    应该: nên
+    放弃: từ bỏ
+    自己: chính mình
+    的: của
+    梦想: ước mơ
+    。: "."
+  expected: không nên từ bỏ ước mơ của chính mình .
+- id: ziji_with_pronoun
+  desc: 'Ziji combined with pronoun: should be ban than [pronoun]'
+  input: 这只是你自己的想法。
+  ltp:
+    cws:
+    - 这
+    - 只
+    - 是
+    - 你
+    - 自己
+    - 的
+    - 想法
+    - 。
+    pos:
+    - r
+    - d
+    - v
+    - r
+    - r
+    - u
+    - n
+    - wp
+  dict:
+    这: đây
+    只: chỉ
+    是: là
+    你: bạn
+    自己: bản thân
+    的: ""
+    想法: suy nghĩ
+    。: "."
+  expected: đây chỉ là suy nghĩ của bản thân bạn .
+- id: ziji_standalone
+  desc: 'Ziji standalone as adverb/subject: should be tu minh/minh'
+  input: 凡事都要自己去做。
+  ltp:
+    cws:
+    - 凡事
+    - 都
+    - 要
+    - 自己
+    - 去
+    - 做
+    - 。
+    pos:
+    - n
+    - d
+    - v
+    - r
+    - v
+    - v
+    - wp
+  dict:
+    凡事: phàm là mọi việc
+    都: đều
+    要: cần
+    自己: tự mình
+    去: ""
+    做: làm
+    。: "."
+  expected: phàm là mọi việc đều cần tự mình làm .
