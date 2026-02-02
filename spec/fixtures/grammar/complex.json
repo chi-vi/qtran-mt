@@ -1,28 +1,80 @@
 [
   {
-    "id": "complex_relative_clause",
-    "desc": "Relative Clause: The book [that] I bought yesterday",
-    "input": "我昨天买的书",
+    "id": "complex_zai_struct",
+    "desc": "Preposition Zai: Eat at home",
+    "input": "我在家里吃饭",
     "ltp": {
-        "cws": ["我", "昨天", "买", "的", "书"],
-        "pos": ["r", "nt", "v", "u", "n"]
+      "cws": ["我", "在", "家里", "吃饭"],
+      "pos": ["r", "p", "nl", "v"]
     },
     "dict": {
-        "我": "tôi", "昨天": "hôm qua", "买": "mua", "的": "của", "书": "sách"
+      "我": "tôi", "在": "ở", "家里": "trong nhà", "吃饭": "ăn cơm"
     },
-    "expected": "sách của tôi mua hôm qua"
+    "expected": "tôi ăn cơm ở trong nhà"
+  },
+  {
+    "id": "complex_noun_de",
+    "desc": "Noun Phrase with DE: My book",
+    "input": "我的书",
+    "ltp": {
+      "cws": ["我", "的", "书"],
+      "pos": ["r", "u", "n"]
+    },
+    "dict": {
+      "我": "tôi", "的": "của", "书": "sách"
+    },
+    "expected": "sách của tôi"
+  },
+  {
+    "id": "complex_time_verb",
+    "desc": "Time + Verb: Yesterday I bought book",
+    "input": "昨天我买书",
+    "ltp": {
+      "cws": ["昨天", "我", "买", "书"],
+      "pos": ["nt", "r", "v", "n"]
+    },
+    "dict": {
+      "昨天": "hôm qua", "我": "tôi", "买": "mua", "书": "sách"
+    },
+    "expected": "tôi mua sách hôm qua"
+  },
+  {
+    "id": "complex_bei",
+    "desc": "Bei Construction: Apple bei me ate",
+    "input": "苹果被我吃了",
+    "ltp": {
+      "cws": ["苹果", "被", "我", "吃", "了"],
+      "pos": ["n", "p", "r", "v", "u"]
+    },
+    "dict": {
+      "苹果": "táo", "被": "bị", "我": "tôi", "吃": "ăn", "了": "rồi"
+    },
+    "expected": "táo đã bị tôi ăn"
+  },
+  {
+    "id": "complex_ba",
+    "desc": "Ba Construction: I ba apple ate",
+    "input": "我把苹果吃了",
+    "ltp": {
+      "cws": ["我", "把", "苹果", "吃", "了"],
+      "pos": ["r", "p", "n", "v", "u"]
+    },
+    "dict": {
+      "我": "tôi", "把": "đem", "苹果": "táo", "吃": "ăn", "了": "rồi"
+    },
+    "expected": "tôi đã ăn táo"
   },
   {
     "id": "complex_zai_ba",
     "desc": "Zai + Ba: At home I ba apple ate (Nested structures)",
     "input": "我在家里把苹果吃了",
     "ltp": {
-        "cws": ["我", "在", "家里", "把", "苹果", "吃", "了"],
-        "pos": ["r", "p", "nl", "p", "n", "v", "u"]
+      "cws": ["我", "在", "家里", "把", "苹果", "吃", "了"],
+      "pos": ["r", "p", "nl", "p", "n", "v", "u"]
     },
     "dict": {
-        "我": "tôi", "在": "ở", "家里": "trong nhà", "把": "đem", "苹果": "táo", "吃": "ăn", "了": "rồi"
+      "我": "tôi", "在": "ở", "家里": "trong nhà", "把": "đem", "苹果": "táo", "吃": "ăn", "了": "rồi"
     },
-    "expected": "tôi ăn táo ở trong nhà rồi"
+    "expected": "tôi đã ăn táo ở trong nhà"
   }
 ]

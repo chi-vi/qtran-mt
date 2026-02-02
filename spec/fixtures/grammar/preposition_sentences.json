@@ -1,0 +1,67 @@
+[
+  {
+    "id": "prep_zai_full",
+    "desc": "Zai (Locative): We study at school",
+    "input": "我们在学校学习",
+    "ltp": {
+      "cws": ["我们", "在", "学校", "学习"],
+      "pos": ["r", "p", "n", "v"]
+    },
+    "dict": {
+      "我们": "chúng tôi", "在": "ở", "学校": "trường", "学习": "học"
+    },
+    "expected": "chúng tôi học ở trường"
+  },
+  {
+    "id": "prep_gei_gl",
+    "desc": "Gei (Benefactive/Target): I give him buy book (I buy book for him)",
+    "input": "我给他买书",
+    "ltp": {
+      "cws": ["我", "给", "他", "买", "书"],
+      "pos": ["r", "p", "r", "v", "n"]
+    },
+    "dict": {
+      "我": "tôi", "给": "cho", "他": "anh ấy", "买": "mua", "书": "sách"
+    },
+    "expected": "tôi mua sách cho anh ấy"
+  },
+  {
+    "id": "prep_gen_com",
+    "desc": "Gen (Comitative): I with him go",
+    "input": "我跟他去",
+    "ltp": {
+      "cws": ["我", "跟", "他", "去"],
+      "pos": ["r", "p", "r", "v"]
+    },
+    "dict": {
+      "我": "tôi", "跟": "với", "他": "anh ấy", "去": "đi"
+    },
+    "expected": "tôi đi với anh ấy"
+  },
+  {
+    "id": "prep_wang_dir",
+    "desc": "Wang (Directional): Towards front walk",
+    "input": "往前走",
+    "ltp": {
+      "cws": ["往", "前", "走"],
+      "pos": ["p", "nd", "v"]
+    },
+    "dict": {
+      "往": "về", "前": "phía trước", "走": "đi"
+    },
+    "expected": "đi về phía trước"
+  },
+  {
+    "id": "prep_zai_obj_complex",
+    "desc": "Zai + Verb + Obj: He puts book on table",
+    "input": "他在桌子上放书",
+    "ltp": {
+      "cws": ["他", "在", "桌子", "上", "放", "书"],
+      "pos": ["r", "p", "n", "nd", "v", "n"]
+    },
+    "dict": {
+      "他": "anh ấy", "在": "ở", "桌子": "bàn", "上": "trên", "放": "để", "书": "sách"
+    },
+    "expected": "anh ấy để sách ở trên bàn"
+  }
+]

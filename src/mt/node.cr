@@ -44,6 +44,6 @@ module QTran
     end
 
     # Utility to check tags
-    delegate noun?, verb?, adj?, pronoun?, part_de?, n_person?, n_dir?, n_time?, prepos?, conj?, to: @tag
+    delegate noun?, verb?, adj?, pronoun?, part_de?, n_person?, n_dir?, n_place?, n_time?, prepos?, conj?, adverb?, to: @tag
   end
 end

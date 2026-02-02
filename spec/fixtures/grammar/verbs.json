@@ -10,7 +10,7 @@
     "dict": {
       "我": "tôi", "把": "đem", "苹果": "táo", "吃": "ăn", "了": "rồi"
     },
-    "expected": "tôi ăn táo rồi"
+    "expected": "tôi đã ăn táo"
   },
   {
     "id": "bei_construction",
@@ -23,7 +23,7 @@
     "dict": {
       "苹果": "táo", "被": "bị", "我": "tôi", "吃": "ăn", "了": "rồi"
     },
-    "expected": "táo bị tôi ăn rồi"
+    "expected": "táo đã bị tôi ăn"
   },
   {
     "id": "conditional_ruguo",

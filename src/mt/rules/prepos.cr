@@ -5,75 +5,84 @@ module QTran
   module PreposRules
     extend self
 
-    def apply(node : MtNode) : MtNode
-      if node.tag.prepos? && (node.key == "在" || node.key == "于")
-        fold_zai(node)
-      else
-        node
-      end
-    end
+    def apply(nodes : Array(MtNode)) : Array(MtNode)
+      new_nodes = [] of MtNode
+      i = 0
 
-    def fold_zai(zai_node : MtNode) : MtNode
-      # Pattern: [Zai] [Loc] [V] ...
-      # VN: [V] ... (tại/ở) [Loc]
+      while i < nodes.size
+        # 1. Generic Preposition Reordering: [Prep] [Obj] [Verb] -> [Verb] [Prep] [Obj]
+        # Applies to: Zai (At), Gei (To/For), Gen (With), Wang (Towards)
 
-      # 1. Identify Loc
-      loc = zai_node.succ
-      return zai_node unless loc
+        if (prep = nodes[i]) && prep.tag.prepos?
+          key = prep.key
+          # Target prepositions
+          if key == "在" || key == "给" || key == "跟" || key == "和" || key == "往"
+            # Check for Object of Prep (Loc/Noun/Pronoun)
+            idx_obj = i + 1
+            if (p_obj = nodes[idx_obj]?) && (p_obj.noun? || p_obj.pronoun? || p_obj.n_place? || p_obj.n_dir?)
+              # Check for Verb following PP
+              idx_verb = idx_obj + 1
+              if (verb = nodes[idx_verb]?) && verb.verb?
+                # Check for Object of Verb (Subject to move?)
+                # Usually: [Prep Obj] [Verb] [VObj] -> [Verb] [VObj] [Prep Obj]
+                idx_vobj = idx_verb + 1
+                v_obj = nodes[idx_vobj]?
+                has_v_obj = v_obj && (v_obj.noun? || v_obj.pronoun?)
 
-      # If Loc is actually a phrase? Assuming single node or handled chunk for now.
-      # If [Zai] is following a verb (Zhu zai Beijing), it's already [V] [Prep] [Loc]. Correct.
-      # We only care if [Zai] is BEFORE the main verb.
+                parent = MtNode.new("", PosTag::Verb)
 
-      # Check previous
-      prev = zai_node.prev
-      if prev && prev.verb?
-        # "Zhu zai ..." -> "Sống ở ...". Fine.
-        zai_node.val = "ở"
-        return zai_node
-      end
+                # Create PP Node
+                pp_node = MtNode.new("", PosTag::Prepos)
 
-      # Search for Verb after Loc
-      # 2. Check for Verb following Loc
-      # Allow intervening modifiers, or Ba/Bei constructions
-      verb = loc.succ
-      while verb && !verb.verb?
-        # Stop if we hit punctuation or another preposition?
-        # Actually Ba is Prepos. We should skip over Ba/Obj to find Verb.
-        break if verb.tag.punct?
-        verb = verb.succ
-      end
+                # Value Mapping
+                case key
+                when "在"      then prep.val = "ở"
+                when "给"      then prep.val = "cho"
+                when "跟", "和" then prep.val = "với"
+                when "往"      then prep.val = "về"
+                end
 
-      if verb && verb.verb?
-        # Found Verb: [Zai] [Loc] ... [Verb]
-        # Move [Zai Loc] to after [Verb] (and its object?)
+                pp_node.children << prep
+                pp_node.children << p_obj
 
-        # Identify resumption point (node after Loc, which will shift left)
-        resume_node = loc.succ
+                # Reorder: Verb [+ VObj] + PP
+                parent.children << verb
+                if has_v_obj && v_obj
+                  parent.children << v_obj
+                end
+                parent.children << pp_node
 
-        # Detach Zai
-        zai_node.remove!
-        # Detach Loc
-        loc.remove!
-
-        # Insert Zai after Verb (or Object if V+Obj)
-        target = verb
-        if (obj = verb.succ) && (obj.noun? || obj.pronoun?)
-          target = obj
+                new_nodes << parent
+                i = has_v_obj ? idx_vobj + 1 : idx_verb + 1
+                next
+              end
+            end
+          end
         end
 
-        target.insert_after(zai_node)
+        # 2. Comparison: A + Bi + B + Adj -> A + Adj + Hon + B
+        if (bi = nodes[i]) && (b_node = nodes[i + 1]?) && (adj = nodes[i + 2]?)
+          if bi.tag.prepos? && bi.key == "比" && adj.adj?
+            parent = MtNode.new("", PosTag::Adj) # Becomes Adj Phrase
+            bi.val = "hơn"
 
-        # Insert Loc after Zai
-        zai_node.insert_after(loc)
+            # Output: Adj + Hon + B
+            parent.children << adj
+            parent.children << bi
+            parent.children << b_node
 
-        zai_node.val = "ở"
+            new_nodes << parent
+            i += 3
+            next
+          end
+        end
 
-        return resume_node || verb # Resume from what used to be after Loc
+        # Default
+        new_nodes << nodes[i]
+        i += 1
       end
 
-      zai_node.val = "ở"
-      zai_node
+      new_nodes
     end
   end
 end

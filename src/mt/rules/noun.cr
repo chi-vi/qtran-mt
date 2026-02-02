@@ -5,126 +5,120 @@ module QTran
   module NounRules
     extend self
 
-    def apply(node : MtNode) : MtNode
-      # Check for [Phrase Head] + de (Attributive or Adverbial)
-      # Covers: Noun+de, Verb+de, Adj+de
-      if (node.noun? || node.pronoun? || node.verb? || node.adj?) &&
-         (succ = node.succ) &&
-         (succ.part_de? || succ.key == "的" || succ.key == "地" || succ.key == "之")
-        return fold_noun_group(node)
-      end
+    def apply(nodes : Array(MtNode)) : Array(MtNode)
+      new_nodes = [] of MtNode
+      i = 0
 
-      case node.tag
-      when .adj?
-        fold_adj_noun(node)
-      when .noun?, .pronoun?
-        fold_noun_group(node)
-      else
-        node
-      end
-    end
+      while i < nodes.size
+        # 0. Conjunction Grouping (Greedy)
+        if (n1 = nodes[i]) && (conj = nodes[i + 1]?) && (n2 = nodes[i + 2]?)
+          if conj.tag.conj?
+            # Check types
+            if (n1.adj? && n2.adj?) || (n1.verb? && n2.verb?) || (n1.noun? && n2.noun?)
+              parent = MtNode.new("", n1.tag) # Inherit type
+              parent.children << n1
+              parent.children << conj
+              parent.children << n2
 
-    # Rule: Adj + Noun -> Noun + Adj
-    def fold_adj_noun(node : MtNode) : MtNode
-      succ = node.succ
-      return node unless succ
-
-      if succ.noun?
-        # Simple Adj swap
-        node.remove!
-        succ.insert_after(node)
-        return succ
-      end
-
-      node
-    end
-
-    # Rule: N1 + de + N2 -> N2 + (của) + N1
-    # Rule: Verb + de + Noun -> Noun + (của) + Verb (Relative Clause)
-    # Rule: N1 + N2 -> N2 + N1 (if not person, etc.)
-    def fold_noun_group(node : MtNode) : MtNode
-      succ = node.succ
-      return node unless succ
-
-      # Case: Noun/Verb + de + Noun
-      if (succ.key == "的" || succ.key == "地" || succ.tag.part_de?) && succ.val != "của" && succ.val != "mà"
-        # N1(node) -> de(succ) -> N2(?)
-        noun2 = succ.succ
-
-        # Check if N2 is valid noun(-phrase) head or VERB (for adverbial mod)
-        if noun2 && (noun2.noun? || noun2.pronoun? || noun2.verb?)
-          # Expand N1 leftwards to capture phrase (Subject + Adverb + Verb...)
-          # e.g. [Wo] [Zuotian] [Mai]
-          n1_start = node
-          curr = node.prev
-
-          # Heuristic: greedy expand left while seeing Noun/Pronoun/Time/Adverb
-          # Stop at punctuation, 'de', or start of sentence
-          while curr
-            tag = curr.tag
-            break if tag.punct? || tag.part_de?
-
-            # Acceptable phrase components: include Adj and Conj
-            if tag.noun? || tag.pronoun? || tag.n_time? || tag.adverb? || tag.verb? || tag.adj? || tag.conj?
-              n1_start = curr
-              curr = curr.prev
-            else
-              break
+              new_nodes << parent
+              i += 3
+              next
             end
           end
-
-          # Check if the captured phrase is purely Adjective/Adverb/Conj
-          # If so, we omit 'de' (val = "")
-          is_pure_adj = true
-          checker = n1_start
-          while checker != succ  # Stop when we reach 'de'
-            break unless checker # Safety check
-
-            if checker.tag.noun? || checker.tag.pronoun? || checker.tag.verb? || checker.tag.n_time?
-              # Found noun/verb -> Not pure adj
-              is_pure_adj = false
-              break
-            end
-            checker = checker.succ
-          end
-
-          # 1. Detach N2
-          noun2.remove!
-
-          # 2. Insert N2 before n1_start
-          n1_start.insert_before(noun2)
-
-          # 3. Insert de after N2 (before n1_start)
-          # Only if not 'de' (Adverbial) or Pure Adj check
-
-          if succ.key == "地" || is_pure_adj
-            succ.remove! # Completely remove 'de' node for natural VN
-          else
-            succ.remove!             # Remove from old spot
-            noun2.insert_after(succ) # Insert in new spot
-            succ.val = "của"
-            succ.tag = PosTag::Part
-          end
-
-          return noun2
         end
+
+        # 1. Attributive/Adverbial/RelClause: [Phrase] + de + [Head]
+        # Match: [N1] [de] [N2]
+        if (n1 = nodes[i]) && (de = nodes[i + 1]?) && (n2 = nodes[i + 2]?)
+          if (de.key == "的" || de.key == "地" || de.key == "之")
+            # Check N2 head
+            if n2.noun? || n2.pronoun? || n2.verb?
+              modifier = n1
+
+              # Special Logic: Relative Clause with Subject?
+              # If n1 is Verb, check if we have a Subject pending in new_nodes
+              if n1.verb? && (subject = new_nodes.last?) && (subject.noun? || subject.pronoun?)
+                # Capturing Subject for Relative Clause
+                # Create a Phrase node for [Subject + Verb]
+                phrase = MtNode.new("", PosTag::Verb)
+                phrase.children << subject
+                phrase.children << n1
+
+                # Remove subject from new_nodes output
+                new_nodes.pop
+
+                modifier = phrase
+              end
+
+              # Check modifier validity
+              if modifier.noun? || modifier.verb? || modifier.adj? || modifier.pronoun?
+                parent = MtNode.new("", PosTag::Noun) # Generic Noun Phrase
+
+                de_val = (de.key == "地") ? "" : "của"
+                if (modifier.adj? || de.key == "地")
+                  de_val = ""
+                end
+                de.val = de_val
+
+                # Swap: [Head] [de] [Modifier]
+                parent.children << n2
+                unless de_val.empty?
+                  parent.children << de
+                end
+                parent.children << modifier
+
+                new_nodes << parent
+                i += 3
+                next
+              end
+            end
+          end
+        end
+
+        # 2. Adj + Noun
+        if (adj = nodes[i]) && (noun = nodes[i + 1]?)
+          if adj.adj? && noun.noun?
+            parent = MtNode.new("", PosTag::Noun)
+            parent.children << noun
+            parent.children << adj
+
+            new_nodes << parent
+            i += 2
+            next
+          end
+        end
+
+        # 3. Noun + Localizer
+        if (noun = nodes[i]) && (loc = nodes[i + 1]?)
+          if noun.noun? && loc.n_dir?
+            parent = MtNode.new("", PosTag::NDir)
+            parent.children << loc
+            parent.children << noun
+
+            new_nodes << parent
+            i += 2
+            next
+          end
+        end
+
+        # 4. Noun + Noun
+        if (n1 = nodes[i]) && (n2 = nodes[i + 1]?)
+          if n1.noun? && n2.noun? && !n2.n_person? && !n1.n_person?
+            parent = MtNode.new("", PosTag::Noun)
+            parent.children << n2
+            parent.children << n1
+
+            new_nodes << parent
+            i += 2
+            next
+          end
+        end
+
+        new_nodes << nodes[i]
+        i += 1
       end
 
-      # Noun + Localizer (NDir) -> Localizer + Noun
-      if succ.tag.n_dir?
-        node.remove!
-        succ.insert_after(node)
-        return node
-      end
-
-      # Noun + Noun swap
-      if node.noun? && succ.noun? && !succ.tag.n_person? && !node.tag.n_person?
-        node.remove!
-        succ.insert_after(node)
-        return node
-      end
-
-      node
+      new_nodes
     end
   end
 end

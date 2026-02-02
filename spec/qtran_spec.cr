@@ -58,16 +58,24 @@ describe "QTran Grammar Suite" do
       grammar = QTran::Grammar.new
       processed_nodes = grammar.process(nodes)
 
-      # 3. Lookup
-      output = processed_nodes.map do |node|
-        if node.val == node.key
-          dict_val = QTran::Dictionary.lookup(node.key, node.tag)
-          node.val = dict_val || "⦰#{node.key}⦰"
-        end
-        node.val
-      end.join(" ")
+      # 3. Lookup & Stringify
+      output = processed_nodes.map do |root|
+        apply_dict_recursive(root)
+        root.to_s.strip
+      end.join(" ").gsub(/\s+/, " ").strip
 
       output.should eq(expected)
     end
+  end
+end
+
+def apply_dict_recursive(node : QTran::MtNode)
+  if node.leaf?
+    if node.val == node.key
+      dict_val = QTran::Dictionary.lookup(node.key, node.tag)
+      node.val = dict_val if dict_val
+    end
+  else
+    node.children.each { |c| apply_dict_recursive(c) }
   end
 end

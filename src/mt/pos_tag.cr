@@ -8,12 +8,12 @@ module QTran
     NTime   # nt (time)
     NPlace  # nl (location)
     NPerson # nh (person)
-    NSkill  # nz (specialized/skill?) - Check mapping, usually 'nz' is other proper noun
-    NIdeo   # ni (idiom?) - Check LTP mapping. 'ni' is organization name in LTP.
+    NSkill  # nz (specialized/skill?)
+    NIdeo   # ni (idiom?)
 
     # Verbs
     Verb   # v
-    VCo    # v + compl? or coverb?
+    VCo    # v + compl?
     VModal # opt / v_modal
 
     # Adjectives
@@ -41,6 +41,10 @@ module QTran
     Number # m
     Quant  # q
 
+    # Comparisons
+    Compar # Comparison marker (như, hơn)
+    Rel    # Relation (bằng)
+
     # Punctuation
     Punct # wp
 
@@ -55,10 +59,10 @@ module QTran
       when "nt"     then NTime
       when "nl"     then NPlace
       when "nh"     then NPerson
-      when "ni"     then NIdeo  # Organization name
-      when "nz"     then NSkill # Other proper noun
+      when "ni"     then NIdeo
+      when "nz"     then NSkill
       when "v"      then Verb
-      when "a", "b" then Adj # b is distintive word, treated as adj often
+      when "a", "b" then Adj
       when "z"      then AdjStat
       when "r"      then Pronoun
       when "d"      then Adverb
@@ -76,12 +80,16 @@ module QTran
       self.in?(Noun, NDir, NTime, NPlace, NPerson, NSkill, NIdeo)
     end
 
+    def n_place?
+      self == NPlace
+    end
+
     def n_dir?
       self == NDir
     end
 
     def n_person?
-      self == NPerson || self == Pronoun # Pronoun is r, but sometimes treated as person for rules
+      self == NPerson || self == Pronoun
     end
 
     def verb?
@@ -96,6 +104,10 @@ module QTran
       self == Pronoun
     end
 
+    def adverb?
+      self == Adverb
+    end
+
     def prepos?
       self == Prepos
     end
@@ -105,10 +117,6 @@ module QTran
     end
 
     def part_de?
-      self == PartDe || (self == Part && true) # How to distinguish 'de' from generic Part if from_ltp maps to Part?
-      # LTP 'u' maps to Part. But logic elsewhere checks key "de" too.
-      # Ideally we refine from_ltp or rely on key check.
-      # For now:
       self == PartDe || self == Part
     end
   end

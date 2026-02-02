@@ -1,5 +1,6 @@
 require "./node"
 require "./rules"
+require "./rules/compare"
 
 module QTran
   class Grammar
@@ -7,19 +8,28 @@ module QTran
     end
 
     def process(nodes : Array(MtNode)) : Array(MtNode)
-      # Recursively apply rules until stable or reduced
-      # For simplicity, we apply rules in phases
-
       current_nodes = nodes
 
-      # 1. Noun Rules (includes Noun Phrasing)
-      current_nodes = QTran::NounRules.apply(current_nodes)
+      # Recursively apply rules until stable (no size change)
+      loop do
+        prev_count = current_nodes.size
 
-      # 2. Verb Rules
-      current_nodes = QTran::VerbRules.apply(current_nodes)
+        # Phase 1: Verb Rules (Time/Ba/Bei)
+        # Run first so NounRules can see grouped Verb Phrases (for relative clauses)
+        current_nodes = QTran::VerbRules.apply(current_nodes)
 
-      # 3. Preposition Rules
-      current_nodes = QTran::PreposRules.apply(current_nodes)
+        # Phase 2: Noun Rules (includes Noun/Adj Phrasing and Relative Clauses)
+        current_nodes = QTran::NounRules.apply(current_nodes)
+
+        # Phase 3: Preposition Rules
+        current_nodes = QTran::PreposRules.apply(current_nodes)
+
+        # Phase 4: Compare / Equative Rules (Bi, Xiang, Yiyang)
+        current_nodes = QTran::CompareRules.apply(current_nodes)
+
+        # Check stability
+        break if current_nodes.size == prev_count
+      end
 
       current_nodes
     end
