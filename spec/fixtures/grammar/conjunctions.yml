@@ -222,3 +222,100 @@
     不: không
     去: đi
   expected: nếu mưa thì không đi
+
+# --- List Enumeration Tests ---
+- id: conj_list_comma
+  desc: 'List with commas: A, B and C'
+  input: 书、笔和纸
+  ltp:
+    cws:
+    - 书
+    - 、
+    - 笔
+    - 和
+    - 纸
+    pos:
+    - n
+    - wp
+    - n
+    - c
+    - n
+  dict:
+    书: sách
+    笔: bút
+    和: và
+    纸: giấy
+    、: ","
+  expected: sách, bút và giấy
+
+- id: conj_list_mixed
+  desc: 'List with mixed punctuation: A, B, and C'
+  input: 苹果，香蕉、橘子跟梨
+  ltp:
+    cws:
+    - 苹果
+    - ，
+    - 香蕉
+    - 、
+    - 橘子
+    - 跟
+    - 梨
+    pos:
+    - n
+    - wp
+    - n
+    - wp
+    - n
+    - c
+    - n
+  dict:
+    苹果: táo
+    香蕉: chuối
+    橘子: quýt
+    跟: với
+    梨: lê
+    、: ","
+    ，: ","
+  expected: táo, chuối, quýt với lê
+
+- id: conj_list_etc
+  desc: 'List with etc: A, B etc.'
+  input: 书、笔等等
+  ltp:
+    cws:
+    - 书
+    - 、
+    - 笔
+    - 等等
+    pos:
+    - n
+    - wp
+    - n
+    - u
+  dict:
+    书: sách
+    笔: bút
+    等等: vân vân
+    、: ","
+  expected: sách, bút vân vân
+
+- id: conj_list_deng
+  desc: 'List with single Deng: A, B etc.'
+  input: 书、笔等
+  ltp:
+    cws:
+    - 书
+    - 、
+    - 笔
+    - 等
+    pos:
+    - n
+    - wp
+    - n
+    - u
+  dict:
+    书: sách
+    笔: bút
+    等: vân vân
+    、: ","
+  expected: sách, bút vân vân

@@ -29,7 +29,8 @@ module QTran
           # Target Adverbs
           if key == "最" || key == "最为" ||
              key == "这么" || key == "那么" || key == "如此" ||
-             key == "非常" || key == "十分" || key == "好好"
+             key == "非常" || key == "十分" || key == "好好" ||
+             key == "很"
             if is_meiyou_context
               new_nodes << nodes[i]
               i += 1
@@ -49,11 +50,19 @@ module QTran
               when "非常"       then adv.val = "vô cùng"
               when "好好"       then adv.val = "cho tốt"
               when "十分"       then adv.val = "mười phần"
+              when "很"        then adv.val = "rất"
               end
 
-              # Output: Head + Adv
-              parent.children << head
-              parent.children << adv
+              # Output logic: Swap or Keep?
+              # "Hen" (Rat) keeps order: "Rat Tot"
+              # Others swap: "Tot Nhat", "Tot Vo Cung"
+              if key == "很"
+                parent.children << adv
+                parent.children << head
+              else
+                parent.children << head
+                parent.children << adv
+              end
 
               new_nodes << parent
               i += 2

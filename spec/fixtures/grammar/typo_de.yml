@@ -1,0 +1,59 @@
+---
+- id: typo_de_complement
+  desc: 'Typo De as Complement: Run [de] fast'
+  input: 跑的快
+  ltp:
+    cws:
+    - 跑
+    - 的
+    - 快
+    pos:
+    - v
+    - u
+    - a
+  dict:
+    跑: chạy
+    的: của
+    快: nhanh
+  expected: chạy nhanh
+
+- id: typo_de_complement_obj
+  desc: 'Typo De as Object Complement: Eat rice [de] fast'
+  input: 吃饭吃的快
+  ltp:
+    cws:
+    - 吃
+    - 饭
+    - 吃
+    - 的
+    - 快
+    pos:
+    - v
+    - n
+    - v
+    - u
+    - a
+  dict:
+    吃: ăn
+    饭: cơm
+    的: của
+    快: nhanh
+  expected: ăn cơm nhanh
+
+- id: typo_de_manner_pre
+  desc: 'Typo De as Manner: Happily [de] speak'
+  input: 高兴的说
+  ltp:
+    cws:
+    - 高兴
+    - 的
+    - 说
+    pos:
+    - a
+    - u
+    - v
+  dict:
+    高兴: vui vẻ
+    的: của
+    说: nói
+  expected: nói vui vẻ

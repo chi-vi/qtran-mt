@@ -6,6 +6,7 @@ require "./rules/number"
 require "./rules/adverb"
 require "./rules/determiner"
 require "./rules/complement"
+require "./rules/punctuation"
 
 module QTran
   class Grammar
@@ -18,6 +19,10 @@ module QTran
       # Recursively apply rules until stable (no size change)
       loop do
         prev_count = current_nodes.size
+
+        # Phase 0.0: Punctuation / Chunking
+        # Wrap quotes/parens to treat them as single units
+        current_nodes = QTran::PunctuationRules.apply(current_nodes)
 
         # Phase 0: Adjective Rules (Measurement, Extent)
         # Run BEFORE VerbRules to prevent 'Dao+Le' being consumed as 'Da+Dao'.

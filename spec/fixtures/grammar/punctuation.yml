@@ -1,0 +1,98 @@
+---
+- id: punct_quote_noun
+  desc: 'Quotes around Noun: I like "apples"'
+  input: 我喜欢“苹果”
+  ltp:
+    cws:
+    - 我
+    - 喜欢
+    - “
+    - 苹果
+    - ”
+    pos:
+    - r
+    - v
+    - wp
+    - n
+    - wp
+  dict:
+    我: tôi
+    喜欢: thích
+    “: "\""
+    苹果: táo
+    ”: "\""
+  expected: tôi thích " táo "
+
+- id: punct_quote_verb
+  desc: 'Quotes around Verb: We need "study"'
+  input: 我们要“学习”
+  ltp:
+    cws:
+    - 我们
+    - 要
+    - “
+    - 学习
+    - ”
+    pos:
+    - r
+    - v
+    - wp
+    - v
+    - wp
+  dict:
+    我们: chúng tôi
+    要: cần
+    “: "\""
+    学习: học tập
+    ”: "\""
+  expected: chúng tôi cần " học tập "
+
+- id: punct_paren_noun
+  desc: 'Parens around Noun: He is (my) friend'
+  input: 他是（我的）朋友
+  ltp:
+    cws:
+    - 他
+    - 是
+    - （
+    - 我
+    - 的
+    - ）
+    - 朋友
+    pos:
+    - r
+    - v
+    - wp
+    - r
+    - u
+    - wp
+    - n
+  dict:
+    他: anh ấy
+    是: là
+    （: (
+    我的: của tôi
+    ）: )
+    朋友: bạn
+  expected: anh ấy là bạn ( của tôi )
+
+- id: punct_attr_quote
+  desc: 'Attribute with quotes: "good" book'
+  input: “好”书
+  ltp:
+    cws:
+    - “
+    - 好
+    - ”
+    - 书
+    pos:
+    - wp
+    - a
+    - wp
+    - n
+  dict:
+    “: "\""
+    好: tốt
+    ”: "\""
+    书: sách
+  expected: sách " tốt "

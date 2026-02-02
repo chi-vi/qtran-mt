@@ -16,56 +16,63 @@ module QTran
         matched = false
         if (head = nodes[i]) && (head.verb? || head.adj?)
           # Case A: Immediate De/Bu: [Verb/Adj] [De] [Compl]
-          if (part = nodes[i + 1]?) && (part.key == "得" || part.key == "不")
+          if (part = nodes[i + 1]?) && (part.key == "得" || part.key == "地" || part.key == "的" || part.key == "不")
             if (compl = nodes[i + 2]?) && (compl.adj? || compl.verb? || compl.adverb? || compl.tag == PosTag::VCo)
-              parent = MtNode.new("", head.tag)
+              # Special Filter: Ignore "Adj + 地/的 + Verb" (Pre-verbal Manner)
+              # ComplementRules usually handles Post-verbal. "地" implies Pre-verbal.
+              # Only allow "Verb + 地 + Adj" (Robustness) or "Adj + 得 + Verb" (Result).
+              if (part.key == "地" || part.key == "的") && head.adj? && (compl.verb? || compl.tag == PosTag::VCo)
+                # Do nothing, let NounRules handle it.
+              else
+                parent = MtNode.new("", head.tag)
 
-              if part.key == "得"
-                part_val = ""
-                # 1. Verb + De + Adj/Adv -> "Chay Nhanh"
-                if head.verb? && (compl.adj? || compl.adverb?)
+                if part.key == "得" || part.key == "地" || part.key == "的"
                   part_val = ""
-                  # 2. Adj + De + Verb -> "Vui den muc nhay"
-                elsif head.adj? && (compl.verb? || compl.tag == PosTag::VCo)
-                  part_val = "đến mức"
-                  # 3. Adj + De + Adj -> "Nong den chet"
-                elsif head.adj? && compl.adj?
-                  part_val = "đến mức"
+                  # 1. Verb + De + Adj/Adv -> "Chay Nhanh"
+                  if head.verb? && (compl.adj? || compl.adverb?)
+                    part_val = ""
+                    # 2. Adj + De + Verb -> "Vui den muc nhay"
+                  elsif head.adj? && (compl.verb? || compl.tag == PosTag::VCo)
+                    part_val = "đến mức"
+                    # 3. Adj + De + Adj -> "Nong den chet"
+                  elsif head.adj? && compl.adj?
+                    part_val = "đến mức"
+                  end
+
+                  # Explicit check for State
+                  if head.adj? && (compl.verb? || compl.tag == PosTag::VCo)
+                    part_val = "đến mức"
+                  end
+
+                  part.val = part_val
                 end
 
-                # Explicit check for State
-                if head.adj? && (compl.verb? || compl.tag == PosTag::VCo)
-                  part_val = "đến mức"
+                # Case B: Potential (De/Bu + Verb/Result)
+                if compl.verb? || compl.tag == PosTag::VCo
+                  if part.key == "得" || part.key == "地" || part.key == "的"
+                    # part.val = "" # handled above or default
+                  elsif part.key == "不"
+                    part.val = "không"
+                  end
                 end
 
-                part.val = part_val
-              end
-
-              # Case B: Potential (De/Bu + Verb/Result)
-              if compl.verb? || compl.tag == PosTag::VCo
-                if part.key == "得"
-                  # part.val = "" # handled above or default
-                elsif part.key == "不"
-                  part.val = "không"
+                parent.children << head
+                unless part.val.empty?
+                  parent.children << part
                 end
-              end
+                parent.children << compl
 
-              parent.children << head
-              unless part.val.empty?
-                parent.children << part
+                new_nodes << parent
+                i += 3
+                matched = true
               end
-              parent.children << compl
-
-              new_nodes << parent
-              i += 3
-              matched = true
             end
           end
 
           # Case C: Verb + Object + De + Compl (Topic Reordered)
           # Only if Case A didn't match
           if !matched && head.verb? && (obj = nodes[i + 1]?) && (obj.noun? || obj.pronoun?)
-            if (part = nodes[i + 2]?) && part.key == "得"
+            if (part = nodes[i + 2]?) && (part.key == "得" || part.key == "地" || part.key == "的")
               if (compl = nodes[i + 3]?) && (compl.adj? || compl.adverb?)
                 # Match: Verb + Obj + De + Compl
                 # Output: Verb, Obj, Compl (Drop De)
@@ -137,7 +144,7 @@ module QTran
           # Case G: Repeated Verb
           if (obj = nodes[i + 1]?) && (obj.noun?)
             if (verb2 = nodes[i + 2]?) && verb2.verb? && verb2.val == verb.val
-              if (de = nodes[i + 3]?) && de.key == "得"
+              if (de = nodes[i + 3]?) && (de.key == "得" || de.key == "地" || de.key == "的")
                 if (compl = nodes[i + 4]?)
                   # Drop Verb2, De. Output: Verb1 Obj Compl
                   new_nodes << verb

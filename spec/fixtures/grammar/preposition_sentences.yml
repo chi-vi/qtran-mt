@@ -131,7 +131,7 @@
     这儿: đây
     很: rất
     近: gần
-  expected: tôi nhà cách đây rất gần
+  expected: nhà tôi cách đây rất gần
 
 - id: prep_dui_towards
   desc: 'Dui (Towards): He towards me very enthusiastic'

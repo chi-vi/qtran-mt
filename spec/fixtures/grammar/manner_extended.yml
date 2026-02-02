@@ -1,0 +1,124 @@
+---
+- id: manner_pre_complex
+  desc: 'Pre-verbal Complex Manner: Very happily speak'
+  input: 很严肃地批评
+  ltp:
+    cws:
+    - 很
+    - 严肃
+    - 地
+    - 批评
+    pos:
+    - d
+    - a
+    - u
+    - v
+  dict:
+    很: rất
+    严肃: nghiêm túc
+    地: mà
+    批评: phê bình
+  expected: phê bình rất nghiêm túc
+
+- id: manner_post_de
+  desc: 'Post-verbal Manner (De): Run fast'
+  input: 跑得快
+  ltp:
+    cws:
+    - 跑
+    - 得
+    - 快
+    pos:
+    - v
+    - u
+    - a
+  dict:
+    跑: chạy
+    得: được
+    快: nhanh
+  expected: chạy nhanh
+
+- id: manner_post_di_robust
+  desc: 'Post-verbal Manner (Di Robust): Run fast (using Di)'
+  input: 跑地快
+  ltp:
+    cws:
+    - 跑
+    - 地
+    - 快
+    pos:
+    - v
+    - u
+    - a
+  dict:
+    跑: chạy
+    地: mà
+    快: nhanh
+  expected: chạy nhanh
+
+- id: manner_post_obj_de
+  desc: 'Post-verbal Object Manner: Eat rice fast'
+  input: 吃饭吃得快
+  ltp:
+    cws:
+    - 吃
+    - 饭
+    - 吃
+    - 得
+    - 快
+    pos:
+    - v
+    - n
+    - v
+    - u
+    - a
+  dict:
+    吃: ăn
+    饭: cơm
+    得: được
+    快: nhanh
+  expected: ăn cơm nhanh
+
+- id: manner_post_obj_di_robust
+  desc: 'Post-verbal Object Manner (Di Robust): Eat rice fast (using Di)'
+  input: 吃饭吃地快
+  ltp:
+    cws:
+    - 吃
+    - 饭
+    - 吃
+    - 地
+    - 快
+    pos:
+    - v
+    - n
+    - v
+    - u
+    - a
+  dict:
+    吃: ăn
+    饭: cơm
+    地: mà
+    快: nhanh
+  expected: ăn cơm nhanh
+
+- id: manner_short_obj_de
+  desc: 'Short Post-verbal Object Manner: Speak Chinese fast'
+  input: 说汉语得快
+  ltp:
+    cws:
+    - 说
+    - 汉语
+    - 得
+    - 快
+    pos:
+    - v
+    - n
+    - u
+    - a
+  dict:
+    说: nói
+    汉语: tiếng Trung
+    得: được
+    快: nhanh
+  expected: nói tiếng Trung nhanh

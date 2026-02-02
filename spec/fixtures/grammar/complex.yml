@@ -131,3 +131,64 @@
     吃: ăn
     了: rồi
   expected: tôi đã ăn táo ở trong nhà
+  expected: tôi đã ăn táo ở trong nhà
+
+- id: complex_list_obj
+  desc: 'List in Object: I buy book, pen and paper'
+  input: 我买书、笔和纸
+  ltp:
+    cws:
+    - 我
+    - 买
+    - 书
+    - 、
+    - 笔
+    - 和
+    - 纸
+    pos:
+    - r
+    - v
+    - n
+    - wp
+    - n
+    - c
+    - n
+  dict:
+    我: tôi
+    买: mua
+    书: sách
+    和: và
+    笔: bút
+    纸: giấy
+    、: ","
+  expected: tôi mua sách, bút và giấy
+
+- id: complex_list_attr
+  desc: 'List in Attributive: Smart, beautiful girl'
+  input: 我喜欢聪明、漂亮的女孩
+  ltp:
+    cws:
+    - 我
+    - 喜欢
+    - 聪明
+    - 、
+    - 漂亮
+    - 的
+    - 女孩
+    pos:
+    - r
+    - v
+    - a
+    - wp
+    - a
+    - u
+    - n
+  dict:
+    我: tôi
+    喜欢: thích
+    聪明: thông minh
+    漂亮: xinh đẹp
+    的: mà
+    女孩: cô gái
+    、: ","
+  expected: tôi thích cô gái thông minh, xinh đẹp

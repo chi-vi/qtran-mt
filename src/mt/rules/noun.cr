@@ -1,5 +1,6 @@
 require "../node"
 require "../pos_tag"
+require "./de_resolver"
 
 module QTran
   module NounRules
@@ -12,7 +13,9 @@ module QTran
       while i < nodes.size
         # 0. Conjunction Grouping (Greedy)
         if (n1 = nodes[i]) && (conj = nodes[i + 1]?) && (n2 = nodes[i + 2]?)
-          if conj.tag.conj?
+          is_list_sep = conj.tag.conj? || (conj.tag == PosTag::Punct && (conj.key == "、" || conj.key == "，"))
+
+          if is_list_sep
             # Check types
             if (n1.adj? && n2.adj?) || (n1.verb? && n2.verb?) || (n1.noun? && n2.noun?)
               parent = MtNode.new("", n1.tag) # Inherit type
@@ -54,17 +57,20 @@ module QTran
               if modifier.noun? || modifier.verb? || modifier.adj? || modifier.pronoun?
                 parent = MtNode.new("", PosTag::Noun) # Generic Noun Phrase
 
-                de_val = (de.key == "地") ? "" : "của"
-                # If modifier is Adj, Verb, or Phrase(Verb), don't use "của" (property)
-                # "Sleeping Baby" -> "Baby Sleeping"
-                if modifier.adj? || modifier.verb? || de.key == "地"
-                  de_val = ""
+                de_val = ""
+
+                if de.key == "地"
+                  de_val = "" # Adverbial 'de'
+                else
+                  # Use DeResolver for 'de'/'zhi'
+                  de_val = DeResolver.resolve(modifier, de)
                 end
+
+                # Special override: Relative clause "de", often empty
                 if modifier.verb? && de.key == "的"
-                  # Optional: could be "mà" for relative clause, but often empty in basic cases
-                  # "Nguoi an com" (Person eat rice)
                   de_val = ""
                 end
+
                 de.val = de_val
 
                 # Swap: [Head] [de] [Modifier]
@@ -112,17 +118,55 @@ module QTran
         if (n1 = nodes[i]) && (n2 = nodes[i + 1]?)
           # Allow Time+Time swap
           should_swap = false
-          if n1.noun? && n2.noun?
-            if !n2.n_person? && !n1.n_person?
+          if (n1.noun? || n1.pronoun?) && n2.noun?
+            # Prevent swapping "NTime NTime" if logic requires
+
+            # Special override for Time
+            if n1.tag == PosTag::NTime && n2.tag == PosTag::NTime
               should_swap = true
-            elsif n1.tag == PosTag::NTime && n2.tag == PosTag::NTime
-              should_swap = true
+            end
+
+            # General Noun/Pronoun Modifiers handling
+            # "Mu Tou Zhuo Zi" (Wood Table) -> "Zhuo Zi Mu Tou" (Table Wood). Correct.
+            if n1.noun? && n2.noun? && !should_swap
+              if !n2.n_person? && !n1.n_person?
+                should_swap = true
+              end
+            end
+
+            # Special Logic for Pronoun + Noun
+            if n1.pronoun? && (n2.noun? || n2.tag.n_person? || n2.tag.n_place? || n2.tag.n_org?)
+              # Check if n2 is possessable/relationship
+              if WordClassifier.person?(n2.key, n2.tag) ||
+                 WordClassifier.place?(n2.key, n2.tag) ||
+                 WordClassifier.org?(n2.key, n2.tag)
+                should_swap = true
+              end
             end
           end
 
           if should_swap
             parent = MtNode.new("", PosTag::Noun)
             parent.children << n2
+            parent.children << n1
+
+            new_nodes << parent
+            i += 2
+            next
+          end
+        end
+
+        # 5. Possessive End-Phrase Adjustment (Dangling De)
+        # Match: [Pronoun/Noun] + [de] (and Rule 1 didn't match)
+        # "Wo de" -> "Cua toi"
+        if (n1 = nodes[i]) && (de = nodes[i + 1]?)
+          if (de.key == "的" || de.key == "之") && (n1.pronoun? || n1.noun?)
+            parent = MtNode.new("", PosTag::Adj) # Treated as Modifier Phrase
+
+            # Force 'cua'
+            de.val = "của"
+
+            parent.children << de
             parent.children << n1
 
             new_nodes << parent

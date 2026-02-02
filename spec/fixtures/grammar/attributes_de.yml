@@ -1,0 +1,108 @@
+---
+- id: attr_de_pronoun
+  desc: 'De with Pronoun: My book'
+  input: 我的书
+  ltp:
+    cws:
+    - 我
+    - 的
+    - 书
+    pos:
+    - r
+    - u
+    - n
+  dict:
+    我: tôi
+    的: của
+    书: sách
+  expected: sách của tôi
+
+- id: attr_de_person_suffix
+  desc: 'De with Person Suffix: Teacher [de] book'
+  input: 老师的书
+  ltp:
+    cws:
+    - 老师
+    - 的
+    - 书
+    pos:
+    - n
+    - u
+    - n
+  dict:
+    老师: giáo viên
+    的: của
+    书: sách
+  expected: sách của giáo viên
+
+- id: attr_de_material
+  desc: 'De with Material (Non-Person): Wood [de] Table'
+  input: 木头的桌子
+  ltp:
+    cws:
+    - 木头
+    - 的
+    - 桌子
+    pos:
+    - n
+    - u
+    - n
+  dict:
+    木头: gỗ
+    的: của
+    桌子: bàn
+  expected: bàn gỗ
+
+- id: attr_de_abstract
+  desc: 'De with Abstract Noun: History [de] Value'
+  input: 历史的价值
+  ltp:
+    cws:
+    - 历史
+    - 的
+    - 价值
+    pos:
+    - n
+    - u
+    - n
+  dict:
+    历史: lịch sử
+    的: của
+    价值: giá trị
+  expected: giá trị lịch sử
+
+- id: attr_de_place
+  desc: 'De with Place: China [de] Capital'
+  input: 中国的首都
+  ltp:
+    cws:
+    - 中国
+    - 的
+    - 首都
+    pos:
+    - ns
+    - u
+    - n
+  dict:
+    中国: Trung Quốc
+    的: của
+    首都: thủ đô
+  expected: thủ đô Trung Quốc
+
+- id: attr_de_possessor_name
+  desc: 'De with Person Name: Xiao Ming [de] Car'
+  input: 小明的车
+  ltp:
+    cws:
+    - 小明
+    - 的
+    - 车
+    pos:
+    - nh
+    - u
+    - n
+  dict:
+    小明: Tiểu Minh
+    的: của
+    车: xe
+  expected: xe của Tiểu Minh
