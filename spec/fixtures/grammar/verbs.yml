@@ -21,7 +21,7 @@
     苹果: táo
     吃: ăn
     了: rồi
-  expected: tôi đã ăn táo
+  expected: tôi ăn táo rồi
 - id: bei_construction
   desc: 'Bei Construction: Apple bei me ate'
   input: 苹果被我吃了

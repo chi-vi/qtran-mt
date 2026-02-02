@@ -206,16 +206,55 @@ module QTran
             parent = MtNode.new("", PosTag::Verb)
 
             # Check particle [Le] after verb?
+            part_node : MtNode? = nil
+            is_modal = false
+
             if (part = nodes[i + 3]?) && (part.key == "了" || part.key == "着" || part.key == "过")
-              part.val = (part.key == "了" || part.key == "过") ? "đã" : "đang"
-              parent.children << part
+              part_node = part
+              if part.key == "了"
+                nxt = nodes[i + 4]?
+                if nxt.nil? || nxt.tag == PosTag::Punct
+                  is_modal = true
+                end
+              end
               i += 4
             else
               i += 3
             end
 
+            # Aspectual Prefix Logic
+            if part_node && !is_modal
+              # Default Aspect
+              val = (part_node.key == "了" || part_node.key == "过") ? "đã" : "đang"
+              part_node.val = val
+
+              if part_node.key == "了"
+                # Suppression Check
+                if (prev = new_nodes.last?) && (prev.key == "已经" || prev.key == "曾经" || prev.key == "刚" || prev.key == "刚刚")
+                  part_node.val = ""
+                end
+              end
+
+              unless part_node.val.empty?
+                parent.children << part_node
+              end
+            end
+
             parent.children << verb
             parent.children << obj
+
+            # Modal Suffix Logic (UNGROUPED)
+            if part_node && is_modal
+              # Only Le is treated as Modal here for now
+              if part_node.key == "了"
+                part_node.val = "rồi"
+                new_nodes << parent
+                new_nodes << part_node
+                next
+              else
+                # Fallback for others if they somehow end up here (Logic restricts is_modal to Le)
+              end
+            end
 
             new_nodes << parent
             next
@@ -267,9 +306,34 @@ module QTran
 
             case part.key
             when "了"
-              part.val = "đã"
-              parent.children << part # Prefix: [Da] [Verb]
-              parent.children << verb
+              # Check Context: Aspectual (Prefix) vs Modal (Suffix)
+              is_modal = false
+              nxt = nodes[i + 2]?
+              if nxt.nil? || nxt.tag == PosTag::Punct
+                is_modal = true
+              end
+
+              if is_modal
+                part.val = "rồi"
+                new_nodes << verb
+                new_nodes << part # Suffix (Separate Node)
+                i += 2
+                next
+              else
+                # Aspectual: "đã" + Verb
+                part.val = "đã"
+
+                # Check for Suppression (Preceding Time Adverb)
+                # "Yijing Chi Le" -> "Da An" (Not "Da Da An")
+                if (prev = new_nodes.last?) && (prev.key == "已经" || prev.key == "曾经" || prev.key == "刚" || prev.key == "刚刚")
+                  part.val = ""
+                end
+
+                unless part.val.empty?
+                  parent.children << part
+                end
+                parent.children << verb
+              end
               handled = true
             when "着"
               part.val = "đang"

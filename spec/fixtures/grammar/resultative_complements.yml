@@ -36,7 +36,7 @@
     听: nghe
     懂: hiểu
     了: rồi
-  expected: nghe đã hiểu
+  expected: nghe hiểu rồi
 
 - id: result_jian_perceive
   desc: 'V+Jian (Perceive): See him'
@@ -90,7 +90,7 @@
     说: nói
     错: sai
     了: rồi
-  expected: nói đã sai
+  expected: nói sai rồi
 
 - id: result_hao_ready
   desc: 'V+Hao (Ready): Prepare ready'

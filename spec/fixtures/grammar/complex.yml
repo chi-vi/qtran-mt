@@ -101,7 +101,7 @@
     苹果: táo
     吃: ăn
     了: rồi
-  expected: tôi đã ăn táo
+  expected: tôi ăn táo rồi
 - id: complex_zai_ba
   desc: 'Zai + Ba: At home I ba apple ate (Nested structures)'
   input: 我在家里把苹果吃了
@@ -130,8 +130,8 @@
     苹果: táo
     吃: ăn
     了: rồi
-  expected: tôi đã ăn táo ở trong nhà
-  expected: tôi đã ăn táo ở trong nhà
+  expected: tôi ăn táo ở trong nhà rồi
+
 
 - id: complex_list_obj
   desc: 'List in Object: I buy book, pen and paper'

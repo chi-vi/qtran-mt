@@ -1,0 +1,84 @@
+---
+- id: le_aspect_basic
+  desc: 'Aspectual Le: He ate rice'
+  input: 他吃了饭
+  ltp:
+    cws:
+    - 他
+    - 吃
+    - 了
+    - 饭
+    pos:
+    - r
+    - v
+    - u
+    - n
+  dict:
+    他: anh ấy
+    吃: ăn
+    了: đã
+    饭: cơm
+  expected: anh ấy đã ăn cơm
+
+- id: le_modal_basic
+  desc: 'Modal Le: He ate'
+  input: 他吃了
+  ltp:
+    cws:
+    - 他
+    - 吃
+    - 了
+    pos:
+    - r
+    - v
+    - u
+  dict:
+    他: anh ấy
+    吃: ăn
+    了: rồi
+  expected: anh ấy ăn rồi
+
+- id: le_aspect_time
+  desc: 'Aspectual Le with Time Adv: He already ate rice'
+  input: 他已经吃了饭
+  ltp:
+    cws:
+    - 他
+    - 已经
+    - 吃
+    - 了
+    - 饭
+    pos:
+    - r
+    - d
+    - v
+    - u
+    - n
+  dict:
+    他: anh ấy
+    已经: đã
+    吃: ăn
+    了: đã
+    饭: cơm
+  expected: anh ấy đã ăn cơm
+
+- id: le_modal_time
+  desc: 'Modal Le with Time Adv: He already ate'
+  input: 他已经吃了
+  ltp:
+    cws:
+    - 他
+    - 已经
+    - 吃
+    - 了
+    pos:
+    - r
+    - d
+    - v
+    - u
+  dict:
+    他: anh ấy
+    已经: đã
+    吃: ăn
+    了: rồi
+  expected: anh ấy đã ăn rồi

@@ -1,0 +1,50 @@
+---
+- id: random_appearance_proof
+  desc: 'Random: Your appearance makes this sentence verified'
+  input: 你的出现让这句话得到了最有力的印证。
+  ltp:
+    cws:
+    - 你
+    - 的
+    - 出现
+    - 让
+    - 这
+    - 句
+    - 话
+    - 得到
+    - 了
+    - 最
+    - 有力
+    - 的
+    - 印证
+    - 。
+    pos:
+    - r
+    - u
+    - v
+    - v
+    - r
+    - q
+    - n
+    - v
+    - u
+    - d
+    - a
+    - u
+    - v
+    - wp
+  dict:
+    你: bạn
+    的: của
+    出现: xuất hiện
+    让: khiến
+    这: này
+    句: câu
+    话: nói
+    得到: đạt được
+    了: rồi
+    最: nhất
+    有力: mạnh mẽ
+    印证: chứng minh
+    。: "."
+  expected: xuất hiện của bạn khiến câu nói này đã đạt được chứng minh mạnh mẽ nhất .

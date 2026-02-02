@@ -27,7 +27,7 @@
     看: đọc
     完: xong
     了: rồi
-  expected: tôi đọc sách đã xong
+  expected: tôi đọc sách xong rồi
 
 - id: ba_open_door
   desc: 'Ba Sentence (Request): Please Ba door open'
@@ -72,7 +72,7 @@
     钱: tiền
     丢: mất
     了: rồi
-  expected: anh ấy đã mất tiền
+  expected: anh ấy mất tiền rồi
 
 - id: ba_put_table
   desc: 'Ba Sentence (Put): I Ba book put on table'
