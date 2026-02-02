@@ -55,7 +55,14 @@ module QTran
                 parent = MtNode.new("", PosTag::Noun) # Generic Noun Phrase
 
                 de_val = (de.key == "地") ? "" : "của"
-                if (modifier.adj? || de.key == "地")
+                # If modifier is Adj, Verb, or Phrase(Verb), don't use "của" (property)
+                # "Sleeping Baby" -> "Baby Sleeping"
+                if modifier.adj? || modifier.verb? || de.key == "地"
+                  de_val = ""
+                end
+                if modifier.verb? && de.key == "的"
+                  # Optional: could be "mà" for relative clause, but often empty in basic cases
+                  # "Nguoi an com" (Person eat rice)
                   de_val = ""
                 end
                 de.val = de_val

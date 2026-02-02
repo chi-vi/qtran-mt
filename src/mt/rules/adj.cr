@@ -18,6 +18,26 @@ module QTran
         if (num = nodes[i]) && num.tag == PosTag::Number
           if (quant = nodes[i + 1]?) && quant.tag == PosTag::Quant
             if (adj = nodes[i + 2]?) && adj.adj?
+              # Check if Adj is followed by Noun?
+              # If "Wu Chi Gao Ren" (5 Foot Tall Person) -> "Ren Gao Wu Chi" (Person Tall 5 Foot)
+              # Wait, "Na San Ben Da Shu" (That 3 Vol Big Book).
+              # [San Ben] [Da] [Shu].
+              # If we swap [San Ben] [Da] -> [Da] [San Ben].
+              # Then we get "Da San Ben Shu".
+              # NounRules does Noun+Noun? Or Adj+Noun (Da, San Ben).
+              # This breaks the "Num Cls" modifying "Noun" relationship.
+
+              # Heuristic: If Adj is followed by Noun, assume [Measure] modifies [Adj+Noun] or [Measure] modifies [Noun].
+              # In "Num Cls Adj Noun", generally "Num Cls" modifies "Noun" (or "Adj Noun").
+              # In "Num Cls Adj" (end of sentence), "Num Cls" modifies "Adj" (Measurement).
+
+              if (check_noun = nodes[i + 3]?) && (check_noun.noun? || check_noun.pronoun?)
+                # Don't swap if Noun follows
+                new_nodes << nodes[i]
+                i += 1
+                next
+              end
+
               parent = MtNode.new("", PosTag::Adj)
 
               # Create Measure Node

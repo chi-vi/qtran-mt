@@ -36,7 +36,7 @@
     "dict": {
       "昨天": "hôm qua", "我": "tôi", "买": "mua", "书": "sách"
     },
-    "expected": "tôi mua sách hôm qua"
+    "expected": "tôi hôm qua mua sách"
   },
   {
     "id": "complex_bei",

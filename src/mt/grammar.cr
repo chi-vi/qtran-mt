@@ -2,7 +2,10 @@ require "./node"
 require "./rules"
 require "./rules/compare"
 require "./rules/adj"
+require "./rules/number"
 require "./rules/adverb"
+require "./rules/determiner"
+require "./rules/complement"
 
 module QTran
   class Grammar
@@ -20,6 +23,9 @@ module QTran
         # Run BEFORE VerbRules to prevent 'Dao+Le' being consumed as 'Da+Dao'.
         current_nodes = QTran::AdjRules.apply(current_nodes)
 
+        # Phase 0.2: Number Rules
+        current_nodes = QTran::NumberRules.apply(current_nodes)
+
         # Phase 0.5: Special Adverb Rules (Zui, Zheme...)
         current_nodes = QTran::AdverbRules.apply(current_nodes)
 
@@ -29,6 +35,12 @@ module QTran
 
         # Phase 2: Noun Rules (includes Noun/Adj Phrasing and Relative Clauses)
         current_nodes = QTran::NounRules.apply(current_nodes)
+
+        # Phase 2.5: Determiner Rules (Post-posing)
+        current_nodes = QTran::DeterminerRules.apply(current_nodes)
+
+        # Phase 2.8: Verb Complement Rules (Degree, Potential, Direction)
+        current_nodes = QTran::ComplementRules.apply(current_nodes)
 
         # Phase 3: Preposition Rules
         current_nodes = QTran::PreposRules.apply(current_nodes)
