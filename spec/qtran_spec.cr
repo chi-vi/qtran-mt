@@ -63,7 +63,7 @@ describe "QTran Grammar Suite" do
       output = processed_nodes.map do |root|
         apply_dict_recursive(root)
         root.to_s.strip
-      end.join(" ").gsub(/\s+/, " ").gsub(" ,", ",").strip
+      end.join(' ').gsub(/\s+/, ' ')
 
       output.should eq(expected)
     end

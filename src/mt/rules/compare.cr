@@ -68,6 +68,11 @@ module QTran
               meiyou.val = "không"
               bang = MtNode.new("bằng", PosTag::Rel, 0, "bằng")
 
+              # Debug
+              # puts "CompareRules: Matched Meiyou. B: #{b_node.key}, ZhemeSkip: #{zheme_skip}, Adj: #{adj.key}"
+              # Check b_node children if any
+              # puts "B Children: #{b_node.children.map(&.key).join(",")}" if b_node.children.any?
+
               # Output: Khong + Adj + Bang + B
               parent.children << meiyou
               parent.children << adj

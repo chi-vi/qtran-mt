@@ -11,34 +11,50 @@ module QTran
       i = 0
 
       while i < nodes.size
-        # 1. Num + Quant + Noun -> Noun + Num + Quant
+        # 1. Num + [Quant] + Noun -> Noun + Num + [Quant]
         if (num = nodes[i]) && (num.tag == PosTag::Number)
-          if (quant = nodes[i + 1]?) && (quant.tag == PosTag::Quant)
-            if (noun = nodes[i + 2]?) && (noun.noun? || noun.tag == PosTag::NTime)
-              parent = MtNode.new("", PosTag::Noun)
+          quant : MtNode? = nil
+          noun : MtNode? = nil
+          consumed = 1
 
-              # Logic: Drop 'Ge' (Cai) if Noun is Time (XiaoShi=Tieng, Mingtian=...)
-              if quant.key == "个"
-                if noun.tag == PosTag::NTime || noun.key == "小时" || noun.key == "钟头"
-                  quant.val = ""
-                end
+          # Optional Quantifier
+          if (nxt = nodes[i + 1]?) && nxt.tag == PosTag::Quant
+            quant = nxt
+            noun = nodes[i + 2]?
+            consumed = 3
+          else
+            noun = nodes[i + 1]?
+            consumed = 2
+          end
+
+          if noun && (noun.noun? || noun.tag == PosTag::NTime)
+            parent = MtNode.new("", PosTag::Noun)
+
+            # Logic: Drop 'Ge' (Cai) if Noun is Time
+            if quant && quant.key == "个"
+              if noun.tag == PosTag::NTime || noun.key == "小时" || noun.key == "钟头"
+                quant.val = ""
               end
+            end
 
+            if quant
               if quant.val.empty?
                 parent.children << num
                 parent.children << noun
               else
-                # Keep [Num] [Quant] [Noun] for standard counting
-                # "1 Quyen Sach" -> "1 Quyen Sach"
                 parent.children << num
                 parent.children << quant
                 parent.children << noun
               end
-
-              new_nodes << parent
-              i += 3
-              next
+            else
+              # Just Num + Noun
+              parent.children << num
+              parent.children << noun
             end
+
+            new_nodes << parent
+            i += consumed
+            next
           end
         end
 

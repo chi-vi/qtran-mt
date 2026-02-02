@@ -120,7 +120,7 @@
     还是: hay
     虚幻: ảo
     ？: "?"
-  expected: cả thế giới đều chỉ là một cuốn sách... vậy thì mọi thứ bản thân trải qua, rốt cuộc là thực hay ảo?
+  expected: cả thế giới đều chỉ là một cuốn sách ... vậy thì mọi thứ bản thân trải qua , rốt cuộc là thực hay ảo ?
 - id: ziji_with_noun
   desc: 'Ziji combined with noun: should be chính mình'
   input: 不应该放弃自己的梦想。
@@ -264,7 +264,7 @@
     木门: cửa gỗ
     走出来: bước ra
     。: "."
-  expected: Nguyên Thanh Tố đang suy nghĩ, Thần Lâm Ngự Tử thay xong quần áo đã từ cửa gỗ quán trọ bước ra.
+  expected: Nguyên Thanh Tố đang suy nghĩ , Thần Lâm Ngự Tử thay xong quần áo , đã bước ra từ cửa gỗ quán trọ .
 - id: random_roadside_stall
   desc: 'Random: Roadside stall scene'
   input: 两人到了小区外的路边摊，不吃扁肉了，整了点烤串，各自要了一瓶啤酒。
@@ -342,7 +342,7 @@
     啤酒: bia
     。: "."
     ，: ","
-  expected: hai người đã đến quán vỉa hè ngoài tiểu khu, không ăn hoành thánh rồi, đã gọi chút thịt xiên nướng, mỗi người đã gọi một chai bia.
+  expected: hai người đã đến quán vỉa hè ngoài tiểu khu , không ăn hoành thánh rồi , đã gọi chút thịt xiên nướng , mỗi người đã gọi một chai bia .
 - id: random_collector_raid
   desc: 'Random: Collector raid scene'
   input: 三十五天前，清洁协会十二骑士之一的‘收藏家’突袭东南亚降临会曼谷总会，当场毙杀三十五名降灵师，包括七名异常附体的大降灵师，头颅全无……
@@ -399,7 +399,7 @@
     - m
     - u
     - wp
-    - n
+    - nr
     - wp
     - v
     - ns
@@ -436,9 +436,9 @@
     之: trong
     一: một
     的: ""
-    ‘: "'"
-    收藏家: nhà sưu tập
-    ’: "'"
+    ‘: "‘"
+    收藏家: Nhà Sưu Tập
+    ’: "’"
     突袭: đột kích
     东南亚: Đông Nam Á
     降临会: Giáng Lâm Hội
@@ -457,4 +457,4 @@
     全无: không còn gì
     ，: ","
     ……: "..."
-  expected: ba mươi lăm ngày trước, nhà sưu tập một trong mười hai kỵ sĩ của hiệp hội làm sạch đột kích tổng hội Bangkok Giáng Lâm Hội Đông Nam Á, tại chỗ giết chết ba mươi lăm người hàng linh sư, bao gồm bảy người đại hàng linh sư nhập xác dị thường, đầu lâu không còn gì...
+  expected: ba mươi lăm ngày trước , một trong mười hai kỵ sĩ hiệp hội làm sạch ‘ Nhà Sưu Tập ’ đột kích tổng hội Bangkok Giáng Lâm Hội Đông Nam Á , tại chỗ giết chết ba mươi lăm người hàng linh sư , bao gồm hàng linh sư đại nhập xác dị thường bảy người , đầu lâu không còn gì ...

@@ -246,7 +246,7 @@
     和: và
     纸: giấy
     、: ","
-  expected: sách, bút và giấy
+  expected: sách , bút và giấy
 
 - id: conj_list_mixed
   desc: 'List with mixed punctuation: A, B, and C'
@@ -276,7 +276,7 @@
     梨: lê
     、: ","
     ，: ","
-  expected: táo, chuối, quýt với lê
+  expected: táo , chuối , quýt với lê
 
 - id: conj_list_etc
   desc: 'List with etc: A, B etc.'
@@ -297,7 +297,7 @@
     笔: bút
     等等: vân vân
     、: ","
-  expected: sách, bút vân vân
+  expected: sách , bút vân vân
 
 - id: conj_list_deng
   desc: 'List with single Deng: A, B etc.'
@@ -318,4 +318,4 @@
     笔: bút
     等: vân vân
     、: ","
-  expected: sách, bút vân vân
+  expected: sách , bút vân vân

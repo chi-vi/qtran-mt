@@ -22,6 +22,8 @@ module QTran
               is_meiyou_context = true
             end
           end
+          # Debug print
+          # puts "AdverbRules: Check Zheme at #{i}. Context: #{is_meiyou_context}. Prev: #{nodes[i - 1].key rescue nil}, PrevPrev: #{nodes[i - 2].key rescue nil}"
         end
 
         if (adv = nodes[i]) && (adv.adverb? || adv.tag == PosTag::Number || adv.pronoun?)
