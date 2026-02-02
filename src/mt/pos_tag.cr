@@ -54,25 +54,24 @@ module QTran
 
     def self.from_ltp(tag : ::String) : PosTag
       case tag
-      when "n"      then Noun
-      when "nd"     then NDir
-      when "nt"     then NTime
-      when "nl"     then NPlace
-      when "nh"     then NPerson
-      when "ni"     then NIdeo
-      when "nz"     then NSkill
-      when "v"      then Verb
-      when "a", "b" then Adj
-      when "z"      then AdjStat
-      when "r"      then Pronoun
-      when "d"      then Adverb
-      when "p"      then Prepos
-      when "c"      then Conj
-      when "u"      then Part
-      when "m"      then Number
-      when "q"      then Quant
-      when "wp"     then Punct
-      else               None
+      when "n"        then Noun
+      when "nd"       then NDir
+      when "nt"       then NTime
+      when "nl", "ns" then NPlace
+      when "ni"       then NIdeo
+      when "nz"       then NSkill
+      when "v"        then Verb
+      when "a", "b"   then Adj
+      when "z"        then AdjStat
+      when "r"        then Pronoun
+      when "d"        then Adverb
+      when "p"        then Prepos
+      when "c"        then Conj
+      when "u"        then Part
+      when "m"        then Number
+      when "q"        then Quant
+      when "wp"       then Punct
+      else                 None
       end
     end
 

@@ -16,10 +16,10 @@ module QTran
         if (prep = nodes[i]) && prep.tag.prepos?
           key = prep.key
           # Target prepositions
-          if key == "在" || key == "给" || key == "跟" || key == "和" || key == "往"
+          if key == "在" || key == "给" || key == "跟" || key == "和" || key == "往" || key == "从"
             # Check for Object of Prep (Loc/Noun/Pronoun)
             idx_obj = i + 1
-            if (p_obj = nodes[idx_obj]?) && (p_obj.noun? || p_obj.pronoun? || p_obj.n_place? || p_obj.n_dir?)
+            if (p_obj = nodes[idx_obj]?) && (p_obj.noun? || p_obj.pronoun? || p_obj.n_place? || p_obj.n_dir? || p_obj.tag == PosTag::Number)
               # Check for Verb following PP
               idx_verb = idx_obj + 1
               if (verb = nodes[idx_verb]?) && verb.verb?
@@ -40,6 +40,7 @@ module QTran
                 when "给"      then prep.val = "cho"
                 when "跟", "和" then prep.val = "với"
                 when "往"      then prep.val = "về"
+                when "从"      then prep.val = "từ"
                 end
 
                 pp_node.children << prep

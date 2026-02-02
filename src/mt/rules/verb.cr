@@ -50,22 +50,48 @@ module QTran
           # Case A: Time + Verb -> Verb + Time
           if (verb = nodes[i + 1]?) && verb.verb?
             parent = MtNode.new("", PosTag::Verb)
+
+            # Check for Object after Verb
+            # Match: [Time] [Verb] [Obj] -> [Verb] [Obj] [Time]
+            # VN: "Hom qua ta di thu vien" is natural, but "Ta di thu vien hom qua" is also good.
+            # Current logic swaps [Time] [Verb] -> [Verb] [Time].
+            # If we have [Verb] [Time] [Obj], it becomes "Di hom qua thu vien" (Bad).
+            # So if we swap, we MUST put Time *after* Object if Object exists.
+
+            idx_obj = i + 2
+            has_obj = false
+            obj = nodes[idx_obj]?
+            if obj && (obj.noun? || obj.pronoun?)
+              has_obj = true
+            end
+
             parent.children << verb
+            if has_obj && obj
+              parent.children << obj
+            end
             parent.children << time
 
             new_nodes << parent
-            i += 2
+            i += (has_obj ? 3 : 2)
             next
           end
 
           # Case B: Time + Subject -> Subject + Time (Noun/Pronoun)
           # "ZuoTian Wo" -> "Wo ZuoTian"
+          # Avoid swapping if Subject is also Time (Time + Time compound)
           if (subj = nodes[i + 1]?) && (subj.noun? || subj.pronoun?)
-            # Swap order in output
-            new_nodes << subj
-            new_nodes << time
-            i += 2
-            next
+            should_swap = true
+            if subj.tag == PosTag::NTime
+              should_swap = false
+            end
+
+            if should_swap
+              # Swap order in output
+              new_nodes << subj
+              new_nodes << time
+              i += 2
+              next
+            end
           end
         end
 

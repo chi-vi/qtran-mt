@@ -1,0 +1,693 @@
+---
+- id: legacy_adverb-samples_2
+  desc: 'Legacy: 我们在公园跑步'
+  input: 我们在公园跑步
+  ltp:
+    cws:
+    - 我们
+    - 在
+    - 公园
+    - 跑步
+    pos:
+    - r
+    - p
+    - n
+    - v
+  dict:
+    我们: chúng ta
+    在: tại
+    公园: công viên
+    跑步: chạy bộ
+  expected: chúng ta chạy bộ ở công viên
+- id: legacy_adverb-samples_13
+  desc: 'Legacy: 营业员很热情'
+  input: 营业员很热情
+  ltp:
+    cws:
+    - 营业员
+    - 很
+    - 热情
+    pos:
+    - n
+    - d
+    - a
+  dict:
+    营业员: nhân viên bán hàng
+    很: rất
+    热情: nhiệt tình
+  expected: nhân viên bán hàng rất nhiệt tình
+- id: legacy_adverb-samples_16
+  desc: 'Legacy: 大家都热烈鼓掌'
+  input: 大家都热烈鼓掌
+  ltp:
+    cws:
+    - 大家
+    - 都
+    - 热烈
+    - 鼓掌
+    pos:
+    - r
+    - d
+    - a
+    - v
+  dict:
+    大家: mọi người
+    都: đều
+    热烈: nhiệt liệt
+    鼓掌: vỗ tay
+  expected: mọi người đều nhiệt liệt vỗ tay
+- id: legacy_khi-luc-thoi-gian_44
+  desc: 'Legacy: 长时间'
+  input: 长时间
+  ltp:
+    cws:
+    - 长
+    - 时间
+    pos:
+    - a
+    - n
+  dict:
+    长: dài
+    时间: thời gian
+  expected: thời gian dài
+- id: legacy_khi-luc-thoi-gian_45
+  desc: 'Legacy: 有时间'
+  input: 有时间
+  ltp:
+    cws:
+    - 有
+    - 时间
+    pos:
+    - v
+    - n
+  dict:
+    有: có
+    时间: thời gian
+  expected: có thời gian
+- id: legacy_noun-phrases_52
+  desc: 'Legacy: 一周前'
+  input: 一周前
+  ltp:
+    cws:
+    - 一
+    - 周
+    - 前
+    pos:
+    - m
+    - q
+    - nd
+  dict:
+    一: một
+    周: tuần
+    前: trước
+  expected: một tuần trước
+- id: legacy_space-sample_54
+  desc: 'Legacy: 右乌龟'
+  input: 右乌龟
+  ltp:
+    cws:
+    - 右
+    - 乌龟
+    pos:
+    - nd
+    - n
+  dict:
+    右: phải
+    乌龟: rùa đen
+  expected: rùa đen phải
+- id: legacy_space-sample_56
+  desc: 'Legacy: 兵荒中'
+  input: 兵荒中
+  ltp:
+    cws:
+    - 兵荒
+    - 中
+    pos:
+    - n
+    - nd
+  dict:
+    兵荒: thiếu lính
+    中: trong
+  expected: trong thiếu lính
+- id: legacy_space-sample_57
+  desc: 'Legacy: 书中人'
+  input: 书中人
+  ltp:
+    cws:
+    - 书
+    - 中
+    - 人
+    pos:
+    - n
+    - nd
+    - n
+  dict:
+    书: sách
+    中: trong
+    人: người
+  expected: người trong sách
+- id: legacy_prepose-phrases_85
+  desc: 'Legacy: 他给她买'
+  input: 他给她买
+  ltp:
+    cws:
+    - 他
+    - 给
+    - 她
+    - 买
+    pos:
+    - r
+    - p
+    - r
+    - v
+  dict:
+    他: hắn
+    给: cho
+    她: nàng
+    买: mua
+  expected: hắn mua cho nàng
+- id: legacy_prepose-phrases_86
+  desc: 'Legacy: 在他的记忆中'
+  input: 在他的记忆中
+  ltp:
+    cws:
+    - 在
+    - 他
+    - 的
+    - 记忆
+    - 中
+    pos:
+    - p
+    - r
+    - u
+    - n
+    - nd
+  dict:
+    在: tại
+    他: hắn
+    的: của
+    记忆: ký ức
+    中: trong
+  expected: tại trong ký ức của hắn
+- id: legacy_compare-bi3_108
+  desc: 'Legacy: 小王比我高'
+  input: 小王比我高
+  ltp:
+    cws:
+    - 小王
+    - 比
+    - 我
+    - 高
+    pos:
+    - nh
+    - p
+    - r
+    - a
+  dict:
+    小王: tiểu vương
+    比: so với
+    我: ta
+    高: cao
+  expected: tiểu vương cao hơn ta
+- id: legacy_compare-bi3_109
+  desc: 'Legacy: 苹果比香蕉好吃'
+  input: 苹果比香蕉好吃
+  ltp:
+    cws:
+    - 苹果
+    - 比
+    - 香蕉
+    - 好吃
+    pos:
+    - n
+    - p
+    - n
+    - a
+  dict:
+    苹果: quả táo
+    比: so với
+    香蕉: chuối tiêu
+    好吃: ngon
+  expected: quả táo ngon hơn chuối tiêu
+- id: legacy_compare-bi3_115
+  desc: 'Legacy: 他做得比我好一点儿'
+  input: 他做得比我好一点儿
+  ltp:
+    cws:
+    - 他
+    - 做
+    - 得
+    - 比
+    - 我
+    - 好
+    - 一点儿
+    pos:
+    - r
+    - v
+    - u
+    - p
+    - r
+    - a
+    - m
+  dict:
+    他: hắn
+    做: làm
+    得: được
+    比: so với
+    我: ta
+    好: tốt
+    一点儿: một chút
+  expected: hắn làm tốt hơn ta một chút
+- id: legacy_compare-bi3_117
+  desc: 'Legacy: 糖果比巧克力甜'
+  input: 糖果比巧克力甜
+  ltp:
+    cws:
+    - 糖果
+    - 比
+    - 巧克力
+    - 甜
+    pos:
+    - n
+    - p
+    - n
+    - a
+  dict:
+    糖果: kẹo
+    比: so với
+    巧克力: sô-cô-la
+    甜: ngọt
+  expected: kẹo ngọt hơn sô-cô-la
+- id: legacy_compare-bi3_118
+  desc: 'Legacy: 他比我胖'
+  input: 他比我胖
+  ltp:
+    cws:
+    - 他
+    - 比
+    - 我
+    - 胖
+    pos:
+    - r
+    - p
+    - r
+    - a
+  dict:
+    他: hắn
+    比: so với
+    我: ta
+    胖: béo
+  expected: hắn béo hơn ta
+- id: legacy_compare-bi3_120
+  desc: 'Legacy: 我觉得你汉语说得比他好一些'
+  input: 我觉得你汉语说得比他好一些
+  ltp:
+    cws:
+    - 我
+    - 觉得
+    - 你
+    - 汉语
+    - 说
+    - 得
+    - 比
+    - 他
+    - 好
+    - 一些
+    pos:
+    - r
+    - v
+    - r
+    - nz
+    - v
+    - u
+    - p
+    - r
+    - a
+    - m
+  dict:
+    我: ta
+    觉得: cảm thấy
+    你: ngươi
+    汉语: tiếng Trung
+    说: nói
+    得: được
+    比: so với
+    他: hắn
+    好: tốt
+    一些: một chút
+  expected: ta cảm thấy ngươi tiếng Trung nói tốt hơn hắn một chút
+- id: legacy_compare-bi3_122
+  desc: 'Legacy: 今天比昨天热'
+  input: 今天比昨天热
+  ltp:
+    cws:
+    - 今天
+    - 比
+    - 昨天
+    - 热
+    pos:
+    - nt
+    - p
+    - nt
+    - a
+  dict:
+    今天: hôm nay
+    比: so với
+    昨天: hôm qua
+    热: nóng
+  expected: hôm nay nóng hơn hôm qua
+- id: legacy_compare-bi3_125
+  desc: 'Legacy: 今天比昨天还热'
+  input: 今天比昨天还热
+  ltp:
+    cws:
+    - 今天
+    - 比
+    - 昨天
+    - 还
+    - 热
+    pos:
+    - nt
+    - p
+    - nt
+    - d
+    - a
+  dict:
+    今天: hôm nay
+    比: so với
+    昨天: hôm qua
+    还: còn
+    热: nóng
+  expected: hôm nay còn nóng hơn hôm qua
+- id: legacy_compare-bi3_130
+  desc: 'Legacy: 我比她矮一点'
+  input: 我比她矮一点
+  ltp:
+    cws:
+    - 我
+    - 比
+    - 她
+    - 矮
+    - 一
+    - 点
+    pos:
+    - r
+    - p
+    - r
+    - a
+    - m
+    - q
+  dict:
+    我: ta
+    比: so với
+    她: nàng
+    矮: thấp
+    一: một
+    点: điểm
+  expected: ta thấp hơn nàng một điểm
+- id: legacy_compare-bi3_134
+  desc: 'Legacy: 他跑得比我快'
+  input: 他跑得比我快
+  ltp:
+    cws:
+    - 他
+    - 跑
+    - 得
+    - 比
+    - 我
+    - 快
+    pos:
+    - r
+    - v
+    - u
+    - p
+    - r
+    - a
+  dict:
+    他: hắn
+    跑: chạy
+    得: được
+    比: so với
+    我: ta
+    快: nhanh
+  expected: hắn chạy nhanh hơn ta
+- id: legacy_compare-bi3_136
+  desc: 'Legacy: 他写汉字写得比我快'
+  input: 他写汉字写得比我快
+  ltp:
+    cws:
+    - 他
+    - 写
+    - 汉字
+    - 写
+    - 得
+    - 比
+    - 我
+    - 快
+    pos:
+    - r
+    - v
+    - nz
+    - v
+    - u
+    - p
+    - r
+    - a
+  dict:
+    他: hắn
+    写: ghi
+    汉字: chữ Hán
+    得: được
+    比: so với
+    我: ta
+    快: nhanh
+  expected: hắn ghi chữ Hán nhanh hơn ta
+- id: legacy_compare-equal_145
+  desc: 'Legacy: 我跟爸爸一样高'
+  input: 我跟爸爸一样高
+  ltp:
+    cws:
+    - 我
+    - 跟
+    - 爸爸
+    - 一样
+    - 高
+    pos:
+    - r
+    - p
+    - n
+    - u
+    - a
+  dict:
+    我: ta
+    跟: cùng
+    爸爸: ba ba
+    一样: một dạng
+    高: cao
+  expected: ta cao như ba ba
+- id: legacy_string-combine_157
+  desc: 'Legacy: http://t.cn/ROjEGXy'
+  input: http://t.cn/ROjEGXy
+  ltp:
+    cws:
+    - http://t.cn/ROjEGXy
+    pos:
+    - ws
+  dict: {}
+  expected: http://t.cn/ROjEGXy
+- id: legacy_prepos-vs-concoord_159
+  desc: 'Legacy: 我跟你是同学'
+  input: 我跟你是同学
+  ltp:
+    cws:
+    - 我
+    - 跟
+    - 你
+    - 是
+    - 同学
+    pos:
+    - r
+    - p
+    - r
+    - v
+    - n
+  dict:
+    我: ta
+    跟: cùng
+    你: ngươi
+    是: là
+    同学: đồng học
+  expected: ta là đồng học với ngươi
+- id: legacy_prepos-vs-concoord_160
+  desc: 'Legacy: 我跟你说一声'
+  input: 我跟你说一声
+  ltp:
+    cws:
+    - 我
+    - 跟
+    - 你
+    - 说
+    - 一
+    - 声
+    pos:
+    - r
+    - p
+    - r
+    - v
+    - m
+    - q
+  dict:
+    我: ta
+    跟: cùng
+    你: ngươi
+    说: nói
+    一: một
+    声: tiếng
+  expected: ta nói với ngươi một tiếng
+- id: legacy_number-handling_165
+  desc: 'Legacy: 1'
+  input: "1"
+  ltp:
+    cws:
+    - "1"
+    pos:
+    - v
+  dict: {}
+  expected: "1"
+- id: legacy_number-handling_166
+  desc: 'Legacy: 12'
+  input: "12"
+  ltp:
+    cws:
+    - "12"
+    pos:
+    - v
+  dict: {}
+  expected: "12"
+- id: legacy_number-handling_167
+  desc: 'Legacy: 99'
+  input: "99"
+  ltp:
+    cws:
+    - "99"
+    pos:
+    - nh
+  dict: {}
+  expected: "99"
+- id: legacy_number-handling_168
+  desc: 'Legacy: 1.2'
+  input: "1.2"
+  ltp:
+    cws:
+    - "1.2"
+    pos:
+    - n
+  dict: {}
+  expected: "1.2"
+- id: legacy_number-handling_169
+  desc: 'Legacy: 133.2'
+  input: "133.2"
+  ltp:
+    cws:
+    - "133.2"
+    pos:
+    - n
+  dict: {}
+  expected: "133.2"
+- id: legacy_number-handling_171
+  desc: 'Legacy: xx 133.2'
+  input: xx 133.2
+  ltp:
+    cws:
+    - 'xx '
+    - "133.2"
+    pos:
+    - nh
+    - n
+  dict: {}
+  expected: xx 133.2
+- id: legacy_number-handling_172
+  desc: 'Legacy: 133.2 xx'
+  input: 133.2 xx
+  ltp:
+    cws:
+    - "133.2 "
+    - xx
+    pos:
+    - i
+    - v
+  dict: {}
+  expected: 133.2 xx
+- id: legacy_number-handling_173
+  desc: 'Legacy: xx 133.2 xx'
+  input: xx 133.2 xx
+  ltp:
+    cws:
+    - 'xx '
+    - "133.2 "
+    - xx
+    pos:
+    - nh
+    - i
+    - v
+  dict: {}
+  expected: xx 133.2 xx
+- id: legacy_number-handling_197
+  desc: 'Legacy: 几十'
+  input: 几十
+  ltp:
+    cws:
+    - 几十
+    pos:
+    - m
+  dict:
+    几十: mấy chục
+  expected: mấy chục
+- id: legacy_number-handling_207
+  desc: 'Legacy: 十五'
+  input: 十五
+  ltp:
+    cws:
+    - 十五
+    pos:
+    - m
+  dict:
+    十五: mười lăm
+  expected: mười lăm
+- id: legacy_unsorted-phrases_236
+  desc: 'Legacy: 都还不太够格'
+  input: 都还不太够格
+  ltp:
+    cws:
+    - 都
+    - 还
+    - 不
+    - 太
+    - 够格
+    pos:
+    - d
+    - d
+    - d
+    - d
+    - a
+  dict:
+    都: đều
+    还: còn
+    不: không
+    太: quá
+    够格: đúng quy cách
+  expected: đều còn không quá đúng quy cách
+- id: legacy_unsorted-phrases_237
+  desc: 'Legacy: 好好休息'
+  input: 好好休息
+  ltp:
+    cws:
+    - 好好
+    - 休息
+    pos:
+    - d
+    - v
+  dict:
+    好好: tử tế
+    休息: nghỉ ngơi
+  expected: nghỉ ngơi cho tốt

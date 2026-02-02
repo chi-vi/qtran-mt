@@ -29,12 +29,11 @@ module QTran
         # Phase 0.5: Special Adverb Rules (Zui, Zheme...)
         current_nodes = QTran::AdverbRules.apply(current_nodes)
 
-        # Phase 1: Verb Rules (Time/Ba/Bei)
-        # Run first so NounRules can see grouped Verb Phrases (for relative clauses)
-        current_nodes = QTran::VerbRules.apply(current_nodes)
-
-        # Phase 2: Noun Rules (includes Noun/Adj Phrasing and Relative Clauses)
+        # Phase 1: Noun Rules (includes Noun/Adj Phrasing and Relative Clauses)
         current_nodes = QTran::NounRules.apply(current_nodes)
+
+        # Phase 2: Verb Rules (Time/Ba/Bei)
+        current_nodes = QTran::VerbRules.apply(current_nodes)
 
         # Phase 2.5: Determiner Rules (Post-posing)
         current_nodes = QTran::DeterminerRules.apply(current_nodes)

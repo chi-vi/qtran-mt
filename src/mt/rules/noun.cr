@@ -110,7 +110,17 @@ module QTran
 
         # 4. Noun + Noun
         if (n1 = nodes[i]) && (n2 = nodes[i + 1]?)
-          if n1.noun? && n2.noun? && !n2.n_person? && !n1.n_person?
+          # Allow Time+Time swap
+          should_swap = false
+          if n1.noun? && n2.noun?
+            if !n2.n_person? && !n1.n_person?
+              should_swap = true
+            elsif n1.tag == PosTag::NTime && n2.tag == PosTag::NTime
+              should_swap = true
+            end
+          end
+
+          if should_swap
             parent = MtNode.new("", PosTag::Noun)
             parent.children << n2
             parent.children << n1

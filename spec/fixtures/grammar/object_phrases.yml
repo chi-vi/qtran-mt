@@ -1,0 +1,151 @@
+---
+# --- Single Object ---
+- id: obj_single
+  desc: 'Single Object: Eat Rice'
+  input: 吃饭
+  ltp:
+    cws:
+    - 吃
+    - 饭
+    pos:
+    - v
+    - n
+  dict:
+    吃: ăn
+    饭: cơm
+  expected: ăn cơm
+
+# --- Zero Object (Intransitive) ---
+- id: obj_zero
+  desc: 'Zero Object: He sleeps'
+  input: 他睡觉
+  ltp:
+    cws:
+    - 他
+    - 睡觉
+    pos:
+    - r
+    - v
+  dict:
+    他: anh ấy
+    睡觉: ngủ
+  expected: anh ấy ngủ
+
+# --- Double Object (Ditransitive) ---
+- id: obj_double_give
+  desc: 'Double Object: Give him a book'
+  input: 给他也一本书
+  ltp:
+    cws:
+    - 给
+    - 他
+    - 也
+    - 一
+    - 本
+    - 书
+    pos:
+    - v
+    - r
+    - d
+    - m
+    - q
+    - n
+  dict:
+    给: cho
+    他: anh ấy
+    也: cũng
+    一: "1"
+    本: quyển
+    书: sách
+  expected: cho anh ấy cũng 1 quyển sách
+  # Note: "Gei Ta" also can be Preposition "To him".
+  # Here "Gei" is Main Verb (Give).
+  # VN: "Cho anh ay cung 1 quyen sach".
+
+- id: obj_double_teach
+  desc: 'Double Object: Teach me Chinese'
+  input: 教我汉语
+  ltp:
+    cws:
+    - 教
+    - 我
+    - 汉语
+    pos:
+    - v
+    - r
+    - n
+  dict:
+    教: dạy
+    我: tôi
+    汉语: tiếng Trung
+  expected: dạy tôi tiếng Trung
+
+# --- Reordered Object (Special/Topic) ---
+- id: obj_reorder_topic
+  desc: 'Reordered (Topic): This book I read'
+  input: 这本书我看过
+  ltp:
+    cws:
+    - 这
+    - 本
+    - 书
+    - 我
+    - 看
+    - 过
+    pos:
+    - r
+    - q
+    - n
+    - r
+    - v
+    - u
+  dict:
+    这: này
+    本: quyển
+    书: sách
+    我: tôi
+    看: đọc
+    过: qua
+  expected: quyển sách này tôi đã từng đọc
+  # "Quyen sach nay toi da tung doc".
+  # Literal translation is perfectly valid Topic-Comment in VN.
+  # SVO: "Toi da tung doc quyen sach nay". Also valid.
+  # Current engine might output "Quyen sach nay toi da tung doc" (Literal).
+
+# --- Object + Complement (Pivotal / Obj+Adj) ---
+- id: obj_compl_pivotal
+  desc: 'Pivotal: Make him happy'
+  input: 让他高兴
+  ltp:
+    cws:
+    - 让
+    - 他
+    - 高兴
+    pos:
+    - v
+    - r
+    - a
+  dict:
+    让: khiến
+    他: anh ấy
+    高兴: vui
+  expected: khiến anh ấy vui
+  # "Khien anh ay vui".
+
+- id: obj_compl_find
+  desc: 'Obj + Compl: Find him strict'
+  input: 觉得他严格
+  ltp:
+    cws:
+    - 觉得
+    - 他
+    - 严格
+    pos:
+    - v
+    - r
+    - a
+  dict:
+    觉得: cảm thấy
+    他: anh ấy
+    严格: nghiêm khắc
+  expected: cảm thấy anh ấy nghiêm khắc

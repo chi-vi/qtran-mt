@@ -1,0 +1,108 @@
+---
+- id: leg_time_noun_order (MingTian WanShang)
+  desc: 'Time NP Order: Tomorrow Evening -> Evening Tomorrow'
+  input: 明天晚上你跟我一起去看电影吗
+  ltp:
+    cws:
+    - 明天
+    - 晚上
+    - 你
+    - 跟
+    - 我
+    - 一起
+    - 去
+    - 看
+    - 电影
+    - 吗
+    pos:
+    - nt
+    - nt
+    - r
+    - p
+    - r
+    - d
+    - v
+    - v
+    - n
+    - u
+  dict:
+    明天: ngày mai
+    晚上: buổi tối
+    你: ngươi
+    跟: cùng
+    我: ta
+    一起: cùng nhau
+    去: đi
+    看: xem
+    电影: điện ảnh
+    吗: à
+  expected: buổi tối ngày mai ngươi cùng ta cùng nhau đi xem điện ảnh à
+
+- id: leg_prepos_zai_loc (Zai Hanoi Univ)
+  desc: 'Prepos Reorder: Study at Hanoi Univ -> Study [At Hanoi Univ]'
+  input: 光金在河内大学学习汉语
+  ltp:
+    cws:
+    - 光金
+    - 在
+    - 河内
+    - 大学
+    - 学习
+    - 汉语
+    pos:
+    - nh
+    - p
+    - ns
+    - n
+    - v
+    - nz
+  dict:
+    光金: Quang Kim
+    在: tại
+    河内: Hà Nội
+    大学: đại học
+    学习: học
+    汉语: tiếng Trung
+  expected: Quang Kim học tiếng Trung ở đại học Hà Nội
+
+- id: leg_prepos_cong_time (Cong 7:30 Start)
+  desc: 'Prepos Reorder: From 7:30 Start -> Start [From 7:30]'
+  input: 联欢会从七点半开始
+  ltp:
+    cws:
+    - 联欢会
+    - 从
+    - 七点半
+    - 开始
+    pos:
+    - n
+    - p
+    - m
+    - v
+  dict:
+    联欢会: hội liên hoan
+    从: từ
+    七点半: bảy giờ rưỡi
+    开始: bắt đầu
+  expected: hội liên hoan bắt đầu từ bảy giờ rưỡi
+
+- id: leg_time_verb_obj (Yesterday Go Library)
+  desc: 'Time Placement: Yesterday go library -> Yesterday [go library]'
+  input: 我昨天去图书馆
+  ltp:
+    cws:
+    - 我
+    - 昨天
+    - 去
+    - 图书馆
+    pos:
+    - r
+    - nt
+    - v
+    - n
+  dict:
+    我: ta
+    昨天: hôm qua
+    去: đi
+    图书馆: thư viện
+  expected: ta đi thư viện hôm qua

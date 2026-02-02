@@ -1,0 +1,143 @@
+---
+# --- Affirmative Cases ---
+- id: opt_want
+  desc: 'Want: I want to eat'
+  input: 我想吃饭
+  ltp:
+    cws:
+    - 我
+    - 想
+    - 吃饭
+    pos:
+    - r
+    - v
+    - v
+  dict:
+    我: tôi
+    想: muốn
+    吃饭: ăn cơm
+  expected: tôi muốn ăn cơm
+
+- id: opt_can_neng
+  desc: 'Can (Neng): I can drive'
+  input: 我能开车
+  ltp:
+    cws:
+    - 我
+    - 能
+    - 开车
+    pos:
+    - r
+    - v
+    - v
+  dict:
+    我: tôi
+    能: có thể
+    开车: lái xe
+  expected: tôi có thể lái xe
+
+- id: opt_can_hui
+  desc: 'Can (Hui): I know how to speak Chinese'
+  input: 我会说汉语
+  ltp:
+    cws:
+    - 我
+    - 会
+    - 说
+    - 汉语
+    pos:
+    - r
+    - v
+    - v
+    - n
+  dict:
+    我: tôi
+    会: biết
+    说: nói
+    汉语: tiếng Trung
+  expected: tôi biết nói tiếng Trung
+
+- id: opt_should
+  desc: 'Should: You should go'
+  input: 你应该去
+  ltp:
+    cws:
+    - 你
+    - 应该
+    - 去
+    pos:
+    - r
+    - v
+    - v
+  dict:
+    你: bạn
+    应该: nên
+    去: đi
+  expected: bạn nên đi
+
+# --- Negative Cases ---
+- id: opt_neg_want (Bu Xiang)
+  desc: 'Neg Want: I do not want to go'
+  input: 我不想去
+  ltp:
+    cws:
+    - 我
+    - 不
+    - 想
+    - 去
+    pos:
+    - r
+    - d
+    - v
+    - v
+  dict:
+    我: tôi
+    不: không
+    想: muốn
+    去: đi
+  expected: tôi không muốn đi
+
+- id: opt_neg_can (Bu Neng)
+  desc: 'Neg Can: I cannot come'
+  input: 我不能来
+  ltp:
+    cws:
+    - 我
+    - 不
+    - 能
+    - 来
+    pos:
+    - r
+    - d
+    - v
+    - v
+  dict:
+    我: tôi
+    不: không
+    能: thể
+    来: đến
+    # "Bu Neng" -> "Khong The". If "Neng" is "The", "Bu" is "Khong".
+    # Or "Neng" is a Verb "co the", Bu+Neng -> Khong + Co The -> Khong the.
+    # We might need special logic if "Bu" modifies "Neng" (Verb).
+  expected: tôi không thể đến
+
+- id: opt_neg_hui (Bu Hui)
+  desc: 'Neg Hui: I do not know how to swim'
+  input: 我不会游泳
+  ltp:
+    cws:
+    - 我
+    - 不
+    - 会
+    - 游泳
+    pos:
+    - r
+    - d
+    - v
+    - v
+  dict:
+    我: tôi
+    不: không
+    会: biết
+    游泳: bơi
+  expected: tôi không biết bơi
