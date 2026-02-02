@@ -1,0 +1,105 @@
+---
+# Ba (把) Sentences - Disposal Construction
+# Report Section 5.1
+
+- id: ba_basic
+  desc: 'Ba Sentence: I Ba book read finish'
+  input: 我把书看完了
+  ltp:
+    cws:
+    - 我
+    - 把
+    - 书
+    - 看
+    - 完
+    - 了
+    pos:
+    - r
+    - p
+    - n
+    - v
+    - v
+    - u
+  dict:
+    我: tôi
+    把: đem
+    书: sách
+    看: đọc
+    完: xong
+    了: rồi
+  expected: tôi đọc sách đã xong
+
+- id: ba_open_door
+  desc: 'Ba Sentence (Request): Please Ba door open'
+  input: 请把门打开
+  ltp:
+    cws:
+    - 请
+    - 把
+    - 门
+    - 打开
+    pos:
+    - v
+    - p
+    - n
+    - v
+  dict:
+    请: xin
+    把: đem
+    门: cửa
+    打开: mở
+  expected: xin mở cửa
+
+- id: ba_lose_money
+  desc: 'Ba Sentence (Loss): He Ba money lose'
+  input: 他把钱丢了
+  ltp:
+    cws:
+    - 他
+    - 把
+    - 钱
+    - 丢
+    - 了
+    pos:
+    - r
+    - p
+    - n
+    - v
+    - u
+  dict:
+    他: anh ấy
+    把: đem
+    钱: tiền
+    丢: mất
+    了: rồi
+  expected: anh ấy đã mất tiền
+
+- id: ba_put_table
+  desc: 'Ba Sentence (Put): I Ba book put on table'
+  input: 我把书放在桌子上
+  ltp:
+    cws:
+    - 我
+    - 把
+    - 书
+    - 放
+    - 在
+    - 桌子
+    - 上
+    pos:
+    - r
+    - p
+    - n
+    - v
+    - p
+    - n
+    - nd
+  dict:
+    我: tôi
+    把: đem
+    书: sách
+    放: để
+    在: ở
+    桌子: bàn
+    上: trên
+  expected: tôi để sách ở trên bàn

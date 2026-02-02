@@ -105,3 +105,54 @@
     放: để
     书: sách
   expected: anh ấy để sách ở trên bàn
+
+- id: prep_li_distance
+  desc: 'Li (Distance): My home distance here very near'
+  input: 我家离这儿很近
+  ltp:
+    cws:
+    - 我
+    - 家
+    - 离
+    - 这儿
+    - 很
+    - 近
+    pos:
+    - r
+    - n
+    - p
+    - r
+    - d
+    - a
+  dict:
+    我: tôi
+    家: nhà
+    离: cách
+    这儿: đây
+    很: rất
+    近: gần
+  expected: tôi nhà cách đây rất gần
+
+- id: prep_dui_towards
+  desc: 'Dui (Towards): He towards me very enthusiastic'
+  input: 他对我很热情
+  ltp:
+    cws:
+    - 他
+    - 对
+    - 我
+    - 很
+    - 热情
+    pos:
+    - r
+    - p
+    - r
+    - d
+    - a
+  dict:
+    他: anh ấy
+    对: đối với
+    我: tôi
+    很: rất
+    热情: nhiệt tình
+  expected: anh ấy đối với tôi rất nhiệt tình

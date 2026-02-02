@@ -1,0 +1,57 @@
+---
+# Manner Adverbials with 地 (De)
+# Report Section 3.3
+
+- id: manner_de_happily
+  desc: 'Manner with De: Happily speak'
+  input: 高兴地说
+  ltp:
+    cws:
+    - 高兴
+    - 地
+    - 说
+    pos:
+    - a
+    - u
+    - v
+  dict:
+    高兴: vui vẻ
+    地: mà
+    说: nói
+  expected: nói vui vẻ
+
+- id: manner_de_diligently
+  desc: 'Manner with De: Diligently study'
+  input: 努力地学习
+  ltp:
+    cws:
+    - 努力
+    - 地
+    - 学习
+    pos:
+    - a
+    - u
+    - v
+  dict:
+    努力: nỗ lực
+    地: mà
+    学习: học tập
+  expected: học tập nỗ lực
+
+- id: manner_de_quickly
+  desc: 'Manner with De: Quickly run'
+  input: 快速地跑
+  ltp:
+    cws:
+    - 快速
+    - 地
+    - 跑
+    pos:
+    - a
+    - u
+    - v
+  dict:
+    快速: nhanh chóng
+    地: mà
+    跑: chạy
+  expected: chạy nhanh chóng

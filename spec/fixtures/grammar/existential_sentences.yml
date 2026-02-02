@@ -1,0 +1,60 @@
+---
+# Existential Sentences
+# Report Section 5.4
+
+- id: exist_fangzhe
+  desc: 'Existential (Fangzhe): On table place book'
+  input: 桌子上放着一本书
+  ltp:
+    cws:
+    - 桌子
+    - 上
+    - 放
+    - 着
+    - 一
+    - 本
+    - 书
+    pos:
+    - n
+    - nd
+    - v
+    - u
+    - m
+    - q
+    - n
+  dict:
+    桌子: bàn
+    上: trên
+    放: đặt
+    着: đang
+    一: một
+    本: quyển
+    书: sách
+  expected: trên bàn đang đặt một quyển sách
+
+- id: exist_lai
+  desc: 'Existential (Lai): Front come person'
+  input: 前面来了一个人
+  ltp:
+    cws:
+    - 前面
+    - 来
+    - 了
+    - 一
+    - 个
+    - 人
+    pos:
+    - nd
+    - v
+    - u
+    - m
+    - q
+    - n
+  dict:
+    前面: phía trước
+    来: đến
+    了: rồi
+    一: một
+    个: cái
+    人: người
+  expected: phía trước đã đến một cái người

@@ -141,3 +141,195 @@
     会: biết
     游泳: bơi
   expected: tôi không biết bơi
+
+# --- Xiang Context Cases (想 - Multiple Meanings) ---
+- id: opt_xiang_think_of
+  desc: 'Xiang Dao (Think of): I thought of you'
+  input: 我想到你
+  ltp:
+    cws:
+    - 我
+    - 想到
+    - 你
+    pos:
+    - r
+    - v
+    - r
+  dict:
+    我: tôi
+    想到: nghĩ đến
+    你: ngươi
+  expected: tôi nghĩ đến ngươi
+
+- id: opt_xiang_miss_pronoun
+  desc: 'Xiang + Pronoun (Miss): I miss you'
+  input: 我想你
+  ltp:
+    cws:
+    - 我
+    - 想
+    - 你
+    pos:
+    - r
+    - v
+    - r
+  dict:
+    我: tôi
+    想: muốn
+    你: ngươi
+  expected: tôi nhớ ngươi
+
+- id: opt_xiang_miss_home
+  desc: 'Xiang + Place (Miss): I miss home'
+  input: 我想家
+  ltp:
+    cws:
+    - 我
+    - 想
+    - 家
+    pos:
+    - r
+    - v
+    - nl  # Place tag for "home"
+  dict:
+    我: tôi
+    想: muốn
+    家: nhà
+  expected: tôi nhớ nhà
+
+- id: opt_xiang_miss_hometown_suffix
+  desc: 'Xiang + Noun with Place Suffix (Miss): I miss hometown (suffix detection)'
+  input: 我想故乡
+  ltp:
+    cws:
+    - 我
+    - 想
+    - 故乡
+    pos:
+    - r
+    - v
+    - n  # Generic noun tag - but 乡 suffix marks it as place
+  dict:
+    我: tôi
+    想: muốn
+    故乡: quê hương
+  expected: tôi nhớ quê hương
+
+- id: opt_xiang_miss_person
+  desc: 'Xiang + Person Name (Miss): I miss Li Ming'
+  input: 我想李明
+  ltp:
+    cws:
+    - 我
+    - 想
+    - 李明
+    pos:
+    - r
+    - v
+    - nh  # Person name tag
+  dict:
+    我: tôi
+    想: muốn
+    李明: Lý Minh
+  expected: tôi nhớ Lý Minh
+
+- id: opt_xiang_miss_place
+  desc: 'Xiang + Place Name (Miss): I miss Beijing'
+  input: 我想北京
+  ltp:
+    cws:
+    - 我
+    - 想
+    - 北京
+    pos:
+    - r
+    - v
+    - ns  # Place name tag
+  dict:
+    我: tôi
+    想: muốn
+    北京: Bắc Kinh
+  expected: tôi nhớ Bắc Kinh
+
+- id: opt_xiang_suppose
+  desc: 'Xiang + Clause (Suppose): I suppose he will come'
+  input: 我想他会来
+  ltp:
+    cws:
+    - 我
+    - 想
+    - 他
+    - 会
+    - 来
+    pos:
+    - r
+    - v
+    - r
+    - v
+    - v
+  dict:
+    我: tôi
+    想: muốn
+    他: hắn
+    会: biết
+    来: đến
+  expected: tôi tưởng hắn sẽ đến
+
+
+# --- Future / Prediction Cases (Hui -> Se) ---
+- id: opt_hui_future_time
+  desc: 'Future Hui (Time): Tomorrow will rain'
+  input: 明天会下雨
+  ltp:
+    cws:
+    - 明天
+    - 会
+    - 下雨
+    pos:
+    - nt
+    - v
+    - v
+  dict:
+    明天: ngày mai
+    会: biết
+    下雨: mưa
+  expected: ngày mai sẽ mưa
+
+- id: opt_hui_future_suffix
+  desc: 'Future Hui (Suffix): Next week will be holiday (suffix detection)'
+  input: 下周会放假
+  ltp:
+    cws:
+    - 下周
+    - 会
+    - 放假
+    pos:
+    - n  # Generic noun tag - but 周 suffix marks it as temporal
+    - v
+    - v
+  dict:
+    下周: tuần sau
+    会: biết
+    放假: nghỉ
+  expected: tuần sau sẽ nghỉ
+
+- id: opt_hui_future_certain
+  desc: 'Future Hui (Certainty): He definitely will come'
+  input: 他一定会来
+  ltp:
+    cws:
+    - 他
+    - 一定
+    - 会
+    - 来
+    pos:
+    - r
+    - d
+    - v
+    - v
+  dict:
+    他: anh ấy
+    一定: nhất định
+    会: biết
+    来: đến
+  expected: anh ấy nhất định sẽ đến

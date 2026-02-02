@@ -58,7 +58,8 @@ module QTran
       when "nd"       then NDir
       when "nt"       then NTime
       when "nl", "ns" then NPlace
-      when "ni"       then NIdeo
+      when "nh"       then NPerson # Person name
+      when "ni"       then NIdeo   # Organization/Institution
       when "nz"       then NSkill
       when "v"        then Verb
       when "a", "b"   then Adj
@@ -89,6 +90,16 @@ module QTran
 
     def n_person?
       self == NPerson || self == Pronoun
+    end
+
+    # Organization/Institution (ni)
+    def n_org?
+      self == NIdeo
+    end
+
+    # For 想 → nhớ pattern: person, place, or organization that can be "missed"
+    def missable_object?
+      self.n_person? || self.n_place? || self.n_org?
     end
 
     def verb?

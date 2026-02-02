@@ -147,3 +147,29 @@
     书: sách
     的: ""
   expected: quyển sách tôi mua này
+
+- id: attr_nested_de
+  desc: 'Nested De Attributes: My friend [de] father [de] car'
+  input: 我朋友的爸爸的车
+  ltp:
+    cws:
+    - 我
+    - 朋友
+    - 的
+    - 爸爸
+    - 的
+    - 车
+    pos:
+    - r
+    - n
+    - u
+    - n
+    - u
+    - n
+  dict:
+    我: tôi
+    朋友: bạn
+    的: của
+    爸爸: bố
+    车: xe
+  expected: tôi xe của bố của bạn

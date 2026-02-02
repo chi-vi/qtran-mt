@@ -1,0 +1,150 @@
+---
+# Resultative Complements (V + Result)
+# Report Section 4.1
+
+- id: result_wan_finish
+  desc: 'V+Wan (Finish): Ate finish rice'
+  input: 吃完饭
+  ltp:
+    cws:
+    - 吃
+    - 完
+    - 饭
+    pos:
+    - v
+    - v
+    - n
+  dict:
+    吃: ăn
+    完: xong
+    饭: cơm
+  expected: ăn xong cơm
+
+- id: result_dong_understand
+  desc: 'V+Dong (Understand): Listen understand'
+  input: 听懂了
+  ltp:
+    cws:
+    - 听
+    - 懂
+    - 了
+    pos:
+    - v
+    - v
+    - u
+  dict:
+    听: nghe
+    懂: hiểu
+    了: rồi
+  expected: nghe đã hiểu
+
+- id: result_jian_perceive
+  desc: 'V+Jian (Perceive): See him'
+  input: 看见他
+  ltp:
+    cws:
+    - 看
+    - 见
+    - 他
+    pos:
+    - v
+    - v
+    - r
+  dict:
+    看: nhìn
+    见: thấy
+    他: anh ấy
+  expected: nhìn thấy anh ấy
+
+- id: result_dao_obtain
+  desc: 'V+Dao (Obtain): Buy obtain ticket'
+  input: 买到票
+  ltp:
+    cws:
+    - 买
+    - 到
+    - 票
+    pos:
+    - v
+    - v
+    - n
+  dict:
+    买: mua
+    到: được
+    票: vé
+  expected: mua được vé
+
+- id: result_cuo_wrong
+  desc: 'V+Cuo (Wrong): Said wrong'
+  input: 说错了
+  ltp:
+    cws:
+    - 说
+    - 错
+    - 了
+    pos:
+    - v
+    - v
+    - u
+  dict:
+    说: nói
+    错: sai
+    了: rồi
+  expected: nói đã sai
+
+- id: result_hao_ready
+  desc: 'V+Hao (Ready): Prepare ready'
+  input: 准备好
+  ltp:
+    cws:
+    - 准备
+    - 好
+    pos:
+    - v
+    - v
+  dict:
+    准备: chuẩn bị
+    好: xong
+  expected: chuẩn bị xong
+
+- id: result_dong_read
+  desc: 'V+Dong (Understand): Read understand'
+  input: 看懂这本书
+  ltp:
+    cws:
+    - 看
+    - 懂
+    - 这
+    - 本
+    - 书
+    pos:
+    - v
+    - v
+    - r
+    - q
+    - n
+  dict:
+    看: đọc
+    懂: hiểu
+    这: này
+    本: quyển
+    书: sách
+  expected: đọc hiểu quyển sách này
+
+- id: result_jian_hear
+  desc: 'V+Jian (Perceive): Hear sound'
+  input: 听见声音
+  ltp:
+    cws:
+    - 听
+    - 见
+    - 声音
+    pos:
+    - v
+    - v
+    - n
+  dict:
+    听: nghe
+    见: thấy
+    声音: tiếng
+  expected: nghe thấy tiếng

@@ -1,5 +1,6 @@
 require "../node"
 require "../pos_tag"
+require "../word_classifier"
 
 module QTran
   module VerbRules
@@ -10,6 +11,93 @@ module QTran
       i = 0
 
       while i < nodes.size
+        # 0.0 Special Handling for "Hui" (Know vs Will)
+        # Must run BEFORE Time reordering moves context away.
+        if (verb = nodes[i]) && verb.key == "会" && verb.verb?
+          is_future = false
+          if (prev = nodes[i - 1]?)
+            # Check preceding Adverb "Yiding" (Certainty)
+            if prev.key == "一定"
+              is_future = true
+            end
+            # Check preceding Time Word using suffix+POS detection
+            if WordClassifier.temporal?(prev.key, prev.tag)
+              is_future = true
+            end
+            # Check for future markers
+            if prev.key == "将"
+              is_future = true
+            end
+            # Check for "想...会" pattern: 想 + Pronoun + 会
+            # Example: 我想他会来 (I suppose he will come)
+            # prev is pronoun (他), prev.prev should be 想
+            if prev.pronoun? && (prev_prev = nodes[i - 2]?) && prev_prev.key == "想"
+              is_future = true
+            end
+          end
+          if is_future
+            verb.val = "sẽ"
+          end
+          # Do NOT 'next' here, allow strict reordering to proceed if needed.
+        end
+
+        # 0.0.1 Special Handling for "Xiang" (想) - Context-dependent meanings
+        # Default: muốn (want) - kept from dictionary
+        # Context patterns:
+        # - 想到 → nghĩ đến (think of/about) - handled as compound verb in dict
+        # - 想 + Pronoun/Person/Place/Org → nhớ (miss)
+        # - 想 + Pronoun + Verb clause → tưởng (suppose)
+        # - 想 + Verb → muốn (want) - default from dict
+        if (verb = nodes[i]) && verb.key == "想" && verb.verb?
+          if (next_node = nodes[i + 1]?)
+            # Check if next token is a "missable" object using suffix+POS detection
+            if WordClassifier.missable?(next_node.key, next_node.tag)
+              # Distinguish between:
+              # "我想你" (I miss you) → nhớ
+              # "我想他会来" (I suppose he will come) → tưởng
+              # Check if there's a following verb (indicating a clause)
+              if (next_next = nodes[i + 2]?) && next_next.verb?
+                verb.val = "tưởng" # Suppose (pronoun + clause)
+              else
+                verb.val = "nhớ" # Miss (just object)
+              end
+            end
+            # Default: 想 + Verb → muốn (want) - dict already handles this
+          end
+        end
+
+        # 0.0.2 A-not-A Questions: V + 不/没 + V → có + V + không/chưa
+        # Examples: 去不去 → có đi không, 吃没吃 → có ăn chưa
+        if (v1 = nodes[i]) && (v1.verb? || v1.tag == PosTag::Adj)
+          if (neg = nodes[i + 1]?) && (neg.key == "不" || neg.key == "没")
+            if (v2 = nodes[i + 2]?) && v2.key == v1.key
+              parent = MtNode.new("", PosTag::Verb)
+
+              # Create "có" node
+              co_node = MtNode.new("có", PosTag::Adverb)
+              co_node.val = "có"
+              parent.children << co_node
+              parent.children << v1
+
+              # Check for following verb (e.g., 想不想去 - the 去)
+              extra_consumed = 0
+              if (v3 = nodes[i + 3]?) && v3.verb?
+                parent.children << v3
+                extra_consumed = 1
+              end
+
+              # Add không/chưa based on negation type
+              khong_node = MtNode.new(neg.key == "没" ? "chưa" : "không", PosTag::Adverb)
+              khong_node.val = neg.key == "没" ? "chưa" : "không"
+              parent.children << khong_node
+
+              new_nodes << parent
+              i += 3 + extra_consumed
+              next
+            end
+          end
+        end
+
         # 0.1 SOV -> SVO Reordering (Topic Comment)
         # Match: [Probable Subject] [Probable Object] [Verb]
         # "Ta Hanyu Shuo..."
@@ -49,6 +137,22 @@ module QTran
         if is_time && time # Helper check
           # Case A: Time + Verb -> Verb + Time
           if (verb = nodes[i + 1]?) && verb.verb?
+            # Special: If verb is "会" (Hui), set val to "sẽ" (Future) because it's preceded by Time.
+            # For Hui, we do NOT reorder: "Ngay mai se X" is more natural than "Se X ngay mai".
+            if verb.key == "会"
+              verb.val = "sẽ"
+              new_nodes << time
+              new_nodes << verb
+              # Also consume the following verb (e.g., 下雨)
+              if (vobj = nodes[i + 2]?) && vobj.verb?
+                new_nodes << vobj
+                i += 3
+              else
+                i += 2
+              end
+              next
+            end
+
             parent = MtNode.new("", PosTag::Verb)
 
             # Check for Object after Verb
@@ -138,6 +242,19 @@ module QTran
             new_nodes << parent
             i += (has_le ? 4 : 3)
             next
+          end
+        end
+
+        # 1.5 Special Handling for "Hui" (Know vs Will) - Standalone Context Check
+        # This handles cases like "Ta Yiding Hui" where Hui is not immediately after Time.
+        if (verb = nodes[i]) && verb.key == "会" && verb.verb?
+          is_future = false
+          # Check preceding Adverb "Yiding" (Certainty)
+          if (prev = nodes[i - 1]?) && prev.key == "一定"
+            is_future = true
+          end
+          if is_future
+            verb.val = "sẽ"
           end
         end
 

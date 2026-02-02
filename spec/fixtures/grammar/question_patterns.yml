@@ -1,0 +1,97 @@
+---
+# A-not-A Questions
+# Report Section 6.4
+
+- id: question_a_not_a_go
+  desc: 'A-not-A Question: Go not go?'
+  input: 你去不去
+  ltp:
+    cws:
+    - 你
+    - 去
+    - 不
+    - 去
+    pos:
+    - r
+    - v
+    - d
+    - v
+  dict:
+    你: bạn
+    去: đi
+    不: không
+  expected: bạn có đi không
+
+- id: question_a_not_a_good
+  desc: 'A-not-A Question: Good not good?'
+  input: 好不好
+  ltp:
+    cws:
+    - 好
+    - 不
+    - 好
+    pos:
+    - a
+    - d
+    - a
+  dict:
+    好: tốt
+    不: không
+  expected: có tốt không
+
+- id: question_a_not_a_eat
+  desc: 'A-not-A Question (Mei): Eat not eat?'
+  input: 吃没吃
+  ltp:
+    cws:
+    - 吃
+    - 没
+    - 吃
+    pos:
+    - v
+    - d
+    - v
+  dict:
+    吃: ăn
+    没: chưa
+  expected: có ăn chưa
+
+- id: question_a_not_a_want
+  desc: 'A-not-A Question: Want not want?'
+  input: 想不想去
+  ltp:
+    cws:
+    - 想
+    - 不
+    - 想
+    - 去
+    pos:
+    - v
+    - d
+    - v
+    - v
+  dict:
+    想: muốn
+    不: không
+    去: đi
+  expected: có muốn đi không
+
+- id: question_a_not_a_can
+  desc: 'A-not-A Question: Can not can?'
+  input: 能不能来
+  ltp:
+    cws:
+    - 能
+    - 不
+    - 能
+    - 来
+    pos:
+    - v
+    - d
+    - v
+    - v
+  dict:
+    能: thể
+    不: không
+    来: đến
+  expected: có thể đến không

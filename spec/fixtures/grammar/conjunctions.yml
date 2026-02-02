@@ -107,3 +107,118 @@
     地: mà
     工作: làm việc
   expected: làm việc nhanh chóng và chính xác
+
+# --- Paired Conjunctions (Report Section 7) ---
+- id: conj_yinwei_suoyi
+  desc: 'Paired Conjunction: Because...therefore'
+  input: 因为下雨所以不去
+  ltp:
+    cws:
+    - 因为
+    - 下雨
+    - 所以
+    - 不
+    - 去
+    pos:
+    - c
+    - v
+    - c
+    - d
+    - v
+  dict:
+    因为: bởi vì
+    下雨: mưa
+    所以: cho nên
+    不: không
+    去: đi
+  expected: bởi vì mưa cho nên không đi
+
+- id: conj_suiran_danshi
+  desc: 'Paired Conjunction: Although...but'
+  input: 虽然累但是很开心
+  ltp:
+    cws:
+    - 虽然
+    - 累
+    - 但是
+    - 很
+    - 开心
+    pos:
+    - c
+    - a
+    - c
+    - d
+    - a
+  dict:
+    虽然: tuy
+    累: mệt
+    但是: nhưng
+    很: rất
+    开心: vui
+  expected: tuy mệt nhưng rất vui
+
+- id: conj_zhiyao_jiu
+  desc: 'Paired Conjunction: As long as...then'
+  input: 只要努力就成功
+  ltp:
+    cws:
+    - 只要
+    - 努力
+    - 就
+    - 成功
+    pos:
+    - c
+    - v
+    - d
+    - v
+  dict:
+    只要: chỉ cần
+    努力: nỗ lực
+    就: là
+    成功: thành công
+  expected: chỉ cần nỗ lực là thành công
+
+- id: conj_zhiyou_cai
+  desc: 'Paired Conjunction: Only...then'
+  input: 只有努力才成功
+  ltp:
+    cws:
+    - 只有
+    - 努力
+    - 才
+    - 成功
+    pos:
+    - c
+    - v
+    - d
+    - v
+  dict:
+    只有: chỉ có
+    努力: nỗ lực
+    才: mới
+    成功: thành công
+  expected: chỉ có nỗ lực mới thành công
+
+- id: conj_ruguo_jiu
+  desc: 'Paired Conjunction: If...then'
+  input: 如果下雨就不去
+  ltp:
+    cws:
+    - 如果
+    - 下雨
+    - 就
+    - 不
+    - 去
+    pos:
+    - c
+    - v
+    - d
+    - d
+    - v
+  dict:
+    如果: nếu
+    下雨: mưa
+    就: thì
+    不: không
+    去: đi
+  expected: nếu mưa thì không đi
