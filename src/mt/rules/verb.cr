@@ -98,6 +98,16 @@ module QTran
           end
         end
 
+        # 0.0.3 Copula 'Shi' (是) Emphasis
+        # Pattern: Pronoun + 是 + Verb -> đúng là + Verb
+        if (verb = nodes[i]) && verb.key == "是" && verb.verb?
+          if (prev = nodes[i - 1]?) && prev.pronoun?
+            if (nxt = nodes[i + 1]?) && nxt.verb?
+              verb.val = "đúng là"
+            end
+          end
+        end
+
         # 0.1 SOV -> SVO Reordering (Topic Comment)
         # Match: [Probable Subject] [Probable Object] [Verb]
         # "Ta Hanyu Shuo..."

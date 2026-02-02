@@ -1,0 +1,81 @@
+---
+- id: copula_basic
+  desc: 'Copula: I am teacher'
+  input: 我是老师
+  ltp:
+    cws:
+    - 我
+    - 是
+    - 老师
+    pos:
+    - r
+    - v
+    - n
+  dict:
+    我: tôi
+    是: là
+    老师: giáo viên
+  expected: tôi là giáo viên
+
+- id: copula_emphatic_verb
+  desc: 'Copula (Emphatic): I am like eating apples'
+  input: 我是喜欢吃苹果
+  ltp:
+    cws:
+    - 我
+    - 是
+    - 喜欢
+    - 吃
+    - 苹果
+    pos:
+    - r
+    - v
+    - v
+    - v
+    - n
+  dict:
+    我: tôi
+    是: là
+    喜欢: thích
+    吃: ăn
+    苹果: táo
+  expected: tôi đúng là thích ăn táo
+
+- id: copula_emphatic_past
+  desc: 'Copula (Emphatic Past): He am came'
+  input: 他是来了
+  ltp:
+    cws:
+    - 他
+    - 是
+    - 来
+    - 了
+    pos:
+    - r
+    - v
+    - v
+    - u
+  dict:
+    他: anh ấy
+    是: là
+    来: đến
+    了: rồi
+  expected: anh ấy đúng là đến rồi
+
+- id: copula_nominal_verb
+  desc: 'Copula (Nominal, not Emphatic): Hobby is swimming'
+  input: 爱好是游泳
+  ltp:
+    cws:
+    - 爱好
+    - 是
+    - 游泳
+    pos:
+    - n
+    - v
+    - v
+  dict:
+    爱好: sở thích
+    是: là
+    游泳: bơi lội
+  expected: sở thích là bơi lội

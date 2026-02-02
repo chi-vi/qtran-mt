@@ -58,3 +58,90 @@
     个: cái
     人: người
   expected: phía trước đã đến một cái người
+
+- id: exist_guazhe
+  desc: 'Existential (Guazhe): Wall on hang picture'
+  input: 墙上挂着一幅画
+  ltp:
+    cws:
+    - 墙
+    - 上
+    - 挂
+    - 着
+    - 一
+    - 幅
+    - 画
+    pos:
+    - n
+    - nd
+    - v
+    - u
+    - m
+    - q
+    - n
+  dict:
+    墙: tường
+    上: trên
+    挂: treo
+    着: đang
+    一: một
+    幅: bức
+    画: tranh
+  expected: trên tường đang treo một bức tranh
+
+- id: exist_shi
+  desc: 'Existential (Shi): Bag in is dictionary'
+  input: 书包里是一本词典
+  ltp:
+    cws:
+    - 书包
+    - 里
+    - 是
+    - 一
+    - 本
+    - 词典
+    pos:
+    - n
+    - nd
+    - v
+    - m
+    - q
+    - n
+  dict:
+    书包: cặp sách
+    里: trong
+    是: là
+    一: một
+    本: quyển
+    词典: từ điển
+  expected: trong cặp sách là một quyển từ điển
+
+- id: exist_tangzhe
+  desc: 'Existential (Tangzhe): Bed on lie patient'
+  input: 床上躺着一个病人
+  ltp:
+    cws:
+    - 床
+    - 上
+    - 躺
+    - 着
+    - 一
+    - 个
+    - 病人
+    pos:
+    - n
+    - nd
+    - v
+    - u
+    - m
+    - q
+    - n
+  dict:
+    床: giường
+    上: trên
+    躺: nằm
+    着: đang
+    一: một
+    个: người
+    病人: bệnh nhân
+  expected: trên giường đang nằm một người bệnh nhân
