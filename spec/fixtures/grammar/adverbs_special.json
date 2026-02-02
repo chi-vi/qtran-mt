@@ -1,0 +1,67 @@
+[
+  {
+    "id": "adv_zui_superlative",
+    "desc": "Zui + Adj: Zui Hao -> Hao Zui (Best)",
+    "input": "最好",
+    "ltp": {
+      "cws": ["最", "好"],
+      "pos": ["d", "a"]
+    },
+    "dict": {
+      "最": "nhất", "好": "tốt"
+    },
+    "expected": "tốt nhất"
+  },
+  {
+    "id": "adv_zheme_demonstrative",
+    "desc": "Zheme + Adj: Zheme Hao -> Hao Zheme (So good)",
+    "input": "这么好",
+    "ltp": {
+      "cws": ["这么", "好"],
+      "pos": ["r", "a"]
+    },
+    "dict": {
+      "这么": "như thế này", "好": "tốt"
+    },
+    "expected": "tốt như thế này"
+  },
+  {
+    "id": "adv_feichang_degree",
+    "desc": "Feichang + Adj: Feichang Hao -> Hao Feichang (Very good/Good extreme)",
+    "input": "非常好",
+    "ltp": {
+      "cws": ["非常", "好"],
+      "pos": ["d", "a"]
+    },
+    "dict": {
+      "非常": "vô cùng", "好": "tốt"
+    },
+    "expected": "tốt vô cùng"
+  },
+  {
+    "id": "adv_haohao_verb",
+    "desc": "Haohao + Verb: Haohao Xuexi -> Xuexi Haohao (Study properly)",
+    "input": "好好学习",
+    "ltp": {
+      "cws": ["好好", "学习"],
+      "pos": ["d", "v"]
+    },
+    "dict": {
+      "好好": "cho tốt", "学习": "học tập"
+    },
+    "expected": "học tập cho tốt"
+  },
+  {
+    "id": "adv_shifen_degree",
+    "desc": "Shifen + Adj: Shifen Hao -> Hao Shifen (Ten parts/Very good)",
+    "input": "十分好",
+    "ltp": {
+      "cws": ["十分", "好"],
+      "pos": ["m", "a"]
+    },
+    "dict": {
+      "十分": "mười phần", "好": "tốt"
+    },
+    "expected": "tốt mười phần"
+  }
+]

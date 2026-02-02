@@ -1,6 +1,8 @@
 require "./node"
 require "./rules"
 require "./rules/compare"
+require "./rules/adj"
+require "./rules/adverb"
 
 module QTran
   class Grammar
@@ -13,6 +15,13 @@ module QTran
       # Recursively apply rules until stable (no size change)
       loop do
         prev_count = current_nodes.size
+
+        # Phase 0: Adjective Rules (Measurement, Extent)
+        # Run BEFORE VerbRules to prevent 'Dao+Le' being consumed as 'Da+Dao'.
+        current_nodes = QTran::AdjRules.apply(current_nodes)
+
+        # Phase 0.5: Special Adverb Rules (Zui, Zheme...)
+        current_nodes = QTran::AdverbRules.apply(current_nodes)
 
         # Phase 1: Verb Rules (Time/Ba/Bei)
         # Run first so NounRules can see grouped Verb Phrases (for relative clauses)

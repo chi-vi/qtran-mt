@@ -1,0 +1,54 @@
+[
+  {
+    "id": "meiyou_zheme",
+    "desc": "Meiyou + Zheme + Adj: I meiyou he so tall",
+    "input": "我没有他这么高",
+    "ltp": {
+      "cws": ["我", "没有", "他", "这么", "高"],
+      "pos": ["r", "v", "r", "r", "a"]
+    },
+    "dict": {
+      "我": "tôi", "没有": "không có", "他": "anh ấy", "这么": "như thế này", "高": "cao"
+    },
+    "expected": "tôi không cao bằng anh ấy"
+  },
+  {
+    "id": "meiyou_name",
+    "desc": "Meiyou + Name + Adj: I meiyou he that tall",
+    "input": "我没有他那么高",
+    "ltp": {
+      "cws": ["我", "没有", "他", "那么", "高"],
+      "pos": ["r", "v", "r", "r", "a"]
+    },
+    "dict": {
+      "我": "tôi", "没有": "không có", "他": "anh ấy", "那么": "như thế đó", "高": "cao"
+    },
+    "expected": "tôi không cao bằng anh ấy"
+  },
+  {
+    "id": "meiyou_dian",
+    "desc": "Meiyou + Obj + Verb + Dian (Noun Mod): I didn't eat a bit",
+    "input": "我没有吃一点",
+    "ltp": {
+      "cws": ["我", "没有", "吃", "一点"],
+      "pos": ["r", "v", "v", "m"]
+    },
+    "dict": {
+      "我": "tôi", "没有": "chưa", "吃": "ăn", "一点": "chút nào"
+    },
+    "expected": "tôi chưa ăn chút nào"
+  },
+  {
+    "id": "meiyou_xie_adj_weird",
+    "desc": "Meiyou + Obj + Adj + Xie (Structure check)",
+    "input": "没有什么好些",
+    "ltp": {
+      "cws": ["没有", "什么", "好", "些"],
+      "pos": ["v", "r", "a", "q"]
+    },
+    "dict": {
+      "没有": "không có", "什么": "cái gì", "好": "tốt", "些": "hơn"
+    },
+    "expected": "không có cái gì tốt hơn"
+  }
+]

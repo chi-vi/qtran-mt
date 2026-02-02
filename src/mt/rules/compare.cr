@@ -11,16 +11,7 @@ module QTran
 
       while i < nodes.size
         # 1. A + Bi + B + (Adv) + Adj -> A + (Adv) + Adj + Hon + B
-        # Pattern: [Bi] [B] [Adv?] [Adj]
-        # Note: A is usually previous node, we don't need to capture it if we just re-order the rest to follow A.
-        # Structure: ... [Bi] [B] ... -> ... [Adj] [Hon] [B]
-
         if (bi = nodes[i]) && (bi.key == "比" || bi.key == "比较")
-          # Search for Adj
-          # Bi + Object + (Adv) + Adj
-          # We scan forward carefully.
-
-          # Get B
           idx_b = i + 1
           if (b_node = nodes[idx_b]?) && (b_node.noun? || b_node.pronoun?)
             # Look for Adj
@@ -37,8 +28,6 @@ module QTran
 
               bi.val = "hơn"
 
-              # Output: (Adv) + Adj + Hon + B
-              # Note: "Also Big" (Cung Lon) -> Cung Lon Hon.
               parent.children << adv_node if adv_node
               parent.children << adj
               parent.children << bi
@@ -51,13 +40,29 @@ module QTran
           end
         end
 
-        # 2. A + Meiyou + B + Adj -> A + Khong + Adj + Bang + B
+        # 2. A + Meiyou + B + (Zheme/Name) + Adj -> A + Khong + Adj + Bang + B
         if (meiyou = nodes[i]) && (meiyou.key == "没有" || meiyou.key == "没")
-          # Check if followed by Noun (B) + Adj
+          # Check if followed by Noun (B) + (Zheme/Name) + Adj
           idx_b = i + 1
           if (b_node = nodes[idx_b]?) && (b_node.noun? || b_node.pronoun?)
             idx_adj = idx_b + 1
+
+            # Optional Zheme/Name (Consumed)
+            zheme_skip = false
+            if (check = nodes[idx_adj]?) && (check.key == "这么" || check.key == "那么")
+              zheme_skip = true
+              idx_adj += 1
+            end
+
             if (adj = nodes[idx_adj]?) && adj.adj?
+              # Lookahead for 'Xie' (Better) -> Existential usage, skip comparison
+              # "Meiyou [Shenme] [Hao] [Xie]" -> "Don't have [anything] [better]"
+              if (following = nodes[idx_adj + 1]?) && following.key == "些"
+                new_nodes << nodes[i]
+                i += 1
+                next
+              end
+
               parent = MtNode.new("", PosTag::Adj)
 
               meiyou.val = "không"
@@ -77,7 +82,6 @@ module QTran
         end
 
         # 3. Equative/Simile: (Gen/Xiang/Ru) + B + (Yiyang) + Adj -> (Adj) + Nhu/Giong + B
-        # Pattern: [Prep] [B] [Yiyang?] [Adj]
         if (prep = nodes[i]) && (prep.key == "跟" || prep.key == "和" || prep.key == "像" || prep.key == "如")
           idx_b = i + 1
           if (b_node = nodes[idx_b]?) && (b_node.noun? || b_node.pronoun?)
@@ -94,15 +98,7 @@ module QTran
             if (adj = nodes[idx_next]?) && adj.adj?
               parent = MtNode.new("", PosTag::Adj)
 
-              # Choose comparator word:
-              # If prep is Gen(跟/和) -> need "bang/nhu".
-              # If prep is Xiang/Ru -> "nhu".
-              # Yiyang often maps to "nhu/bang".
-
               comparator = MtNode.new("như", PosTag::Compar, 0, "như")
-
-              # If we have Yiyang, use its val? Or just use generic 'như'.
-              # "A cao như B" is standard for "A Gen B Yiyang Gao".
 
               # Output: Adj + Nhu + B
               parent.children << adj
