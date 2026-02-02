@@ -1,0 +1,121 @@
+---
+- id: compl_level_repeated
+  desc: 'Level (Repeated Verb): Speaks Chinese (speaks) very well'
+  input: 他说汉语说得很好
+  ltp:
+    cws:
+    - 他
+    - 说
+    - 汉语
+    - 说
+    - 得
+    - 很
+    - 好
+    pos:
+    - r
+    - v
+    - n
+    - v
+    - u
+    - d
+    - a
+  dict:
+    他: anh ấy
+    说: nói
+    汉语: tiếng Trung
+    得: được
+    很: rất
+    好: giỏi
+  expected: anh ấy nói tiếng Trung rất giỏi
+- id: compl_level_topic
+  desc: 'Level (Topic Object): Chinese he speaks very well'
+  input: 他汉语说得很好
+  ltp:
+    cws:
+    - 他
+    - 汉语
+    - 说
+    - 得
+    - 很
+    - 好
+    pos:
+    - r
+    - n
+    - v
+    - u
+    - d
+    - a
+  dict:
+    他: anh ấy
+    汉语: tiếng Trung
+    说: nói
+    得: được
+    很: rất
+    好: giỏi
+  expected: anh ấy nói tiếng Trung rất giỏi
+- id: compl_dir_split_object
+  desc: 'Split Directional: Take out a book (come)'
+  input: 拿出一本书来
+  ltp:
+    cws:
+    - 拿
+    - 出
+    - 一
+    - 本
+    - 书
+    - 来
+    pos:
+    - v
+    - v
+    - m
+    - q
+    - n
+    - v
+  dict:
+    拿: lấy
+    出: ra
+    一: "1"
+    本: quyển
+    书: sách
+    来: đến
+  expected: lấy ra 1 quyển sách
+- id: compl_dir_post_object
+  desc: 'Directional after Object: Bring book back'
+  input: 带书回来
+  ltp:
+    cws:
+    - 带
+    - 书
+    - 回
+    - 来
+    pos:
+    - v
+    - n
+    - v
+    - v
+  dict:
+    带: mang
+    书: sách
+    回: về
+    来: đến
+  expected: mang sách về
+- id: compl_dir_split_loc
+  desc: 'Split Directional (Loc): Run back home (go)'
+  input: 跑回家去
+  ltp:
+    cws:
+    - 跑
+    - 回
+    - 家
+    - 去
+    pos:
+    - v
+    - v
+    - n
+    - v
+  dict:
+    跑: chạy
+    回: về
+    家: nhà
+    去: đi
+  expected: chạy về nhà

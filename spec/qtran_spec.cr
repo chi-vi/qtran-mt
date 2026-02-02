@@ -2,14 +2,15 @@ require "./spec_helper"
 require "../src/mt/node"
 require "../src/mt/grammar"
 require "../src/mt/rules"
+require "yaml"
 
 describe "QTran Grammar Suite" do
   # Load fixtures
-  fixtures = [] of JSON::Any
-  Dir.glob("spec/fixtures/grammar/*.json") do |file|
+  fixtures = [] of YAML::Any
+  Dir.glob("spec/fixtures/grammar/*.yml") do |file|
     content = File.read(file)
-    json = Array(JSON::Any).from_json(content)
-    fixtures.concat(json)
+    yaml = Array(YAML::Any).from_yaml(content)
+    fixtures.concat(yaml)
   end
 
   # Setup Mocks
@@ -37,7 +38,7 @@ describe "QTran Grammar Suite" do
 
       # Setup Dict data
       fixture["dict"].as_h.each do |k, v|
-        dict_mock.data[k] = v.as_s
+        dict_mock.data[k.as_s] = v.as_s
       end
 
       # Run logic manualy (mimic qtran.cr) or use CLI run?

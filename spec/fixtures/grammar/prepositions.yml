@@ -1,0 +1,44 @@
+---
+- id: zai_loc_verb
+  desc: 'Preposition Zai: Eat at home'
+  input: 我在家里吃饭
+  ltp:
+    cws:
+    - 我
+    - 在
+    - 家里
+    - 吃
+    - 饭
+    pos:
+    - r
+    - p
+    - nl
+    - v
+    - n
+  dict:
+    我: tôi
+    在: ở
+    家里: trong nhà
+    吃: ăn
+    饭: cơm
+  expected: tôi ăn cơm ở trong nhà
+- id: comparison_bi
+  desc: 'Comparison: I bi you big'
+  input: 我比你大
+  ltp:
+    cws:
+    - 我
+    - 比
+    - 你
+    - 大
+    pos:
+    - r
+    - p
+    - r
+    - a
+  dict:
+    我: tôi
+    比: so với
+    你: bạn
+    大: lớn
+  expected: tôi lớn hơn bạn

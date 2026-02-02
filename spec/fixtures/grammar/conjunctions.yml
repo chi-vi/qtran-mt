@@ -1,0 +1,109 @@
+---
+- id: conj_noun_central
+  desc: 'Conjunction (Centric Nouns): Table and Chair'
+  input: 桌子和椅子
+  ltp:
+    cws:
+    - 桌子
+    - 和
+    - 椅子
+    pos:
+    - n
+    - c
+    - n
+  dict:
+    桌子: bàn
+    和: và
+    椅子: ghế
+  expected: bàn và ghế
+- id: conj_attributive
+  desc: 'Conjunction (Attributive): Smart and beautiful [de] Girl'
+  input: 聪明又漂亮的女孩
+  ltp:
+    cws:
+    - 聪明
+    - 又
+    - 漂亮
+    - 的
+    - 女孩
+    pos:
+    - a
+    - c
+    - a
+    - u
+    - n
+  dict:
+    聪明: thông minh
+    又: vừa
+    漂亮: xinh đẹp
+    的: mà
+    女孩: cô gái
+  expected: cô gái thông minh vừa xinh đẹp
+- id: conj_verbs
+  desc: 'Conjunction (Verbs): Discuss and Resolve'
+  input: 讨论并解决
+  ltp:
+    cws:
+    - 讨论
+    - 并
+    - 解决
+    pos:
+    - v
+    - c
+    - v
+  dict:
+    讨论: thảo luận
+    并: và
+    解决: giải quyết
+  expected: thảo luận và giải quyết
+- id: conj_clauses
+  desc: 'Conjunction (Clauses): Not only... but also...'
+  input: 不但我去而且他也去
+  ltp:
+    cws:
+    - 不但
+    - 我
+    - 去
+    - 而且
+    - 他
+    - 也
+    - 去
+    pos:
+    - c
+    - r
+    - v
+    - c
+    - r
+    - d
+    - v
+  dict:
+    不但: không những
+    我: tôi
+    去: đi
+    而且: mà còn
+    他: anh ấy
+    也: cũng
+  expected: không những tôi đi mà còn anh ấy cũng đi
+- id: conj_adverbial
+  desc: 'Conjunction (Adverbials): Quickly and Accurately Work'
+  input: 快速并准确地工作
+  ltp:
+    cws:
+    - 快速
+    - 并
+    - 准确
+    - 地
+    - 工作
+    pos:
+    - a
+    - c
+    - a
+    - u
+    - v
+  dict:
+    快速: nhanh chóng
+    并: và
+    准确: chính xác
+    地: mà
+    工作: làm việc
+  expected: làm việc nhanh chóng và chính xác

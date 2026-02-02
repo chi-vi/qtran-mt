@@ -1,0 +1,83 @@
+---
+- id: loc_noun_basic
+  desc: 'Noun + Localizer: Table Top -> On Table'
+  input: 桌子上
+  ltp:
+    cws:
+    - 桌子
+    - 上
+    pos:
+    - n
+    - nd
+  dict:
+    桌子: bàn
+    上: trên
+  expected: trên bàn
+- id: loc_noun_li
+  desc: 'Noun + Li (Inside): Home Inside -> In Home'
+  input: 家里
+  ltp:
+    cws:
+    - 家
+    - 里
+    pos:
+    - n
+    - nd
+  dict:
+    家: nhà
+    里: trong
+  expected: trong nhà
+- id: loc_prepos_zai_complex
+  desc: 'Zai + Noun + Loc: At Table Top -> At On Table'
+  input: 在桌子上
+  ltp:
+    cws:
+    - 在
+    - 桌子
+    - 上
+    pos:
+    - p
+    - n
+    - nd
+  dict:
+    在: ở
+    桌子: bàn
+    上: trên
+  expected: ở trên bàn
+- id: loc_verb_phrase_dir
+  desc: 'Verb + Noun + Loc: Put Table Top -> Put On Table'
+  input: 放在桌子上
+  ltp:
+    cws:
+    - 放
+    - 在
+    - 桌子
+    - 上
+    pos:
+    - v
+    - p
+    - n
+    - nd
+  dict:
+    放: để
+    在: ở
+    桌子: bàn
+    上: trên
+  expected: để ở trên bàn
+- id: loc_verb_direction
+  desc: 'Verb + Direction (Loc): Walk Towards Front'
+  input: 走向前
+  ltp:
+    cws:
+    - 走
+    - 向
+    - 前
+    pos:
+    - v
+    - p
+    - nd
+  dict:
+    走: đi
+    向: hướng
+    前: trước
+  expected: đi hướng trước

@@ -28,10 +28,11 @@ module QTran
                 parent.children << num
                 parent.children << noun
               else
-                # Standard: [Noun] [Num] [Quant]
-                parent.children << noun
+                # Keep [Num] [Quant] [Noun] for standard counting
+                # "1 Quyen Sach" -> "1 Quyen Sach"
                 parent.children << num
                 parent.children << quant
+                parent.children << noun
               end
 
               new_nodes << parent

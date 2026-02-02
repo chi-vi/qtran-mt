@@ -10,6 +10,30 @@ module QTran
       i = 0
 
       while i < nodes.size
+        # 0.1 SOV -> SVO Reordering (Topic Comment)
+        # Match: [Probable Subject] [Probable Object] [Verb]
+        # "Ta Hanyu Shuo..."
+        if (subj = nodes[i]) && (obj = nodes[i + 1]?) && (verb = nodes[i + 2]?)
+          if (subj.pronoun? || subj.tag == PosTag::Noun) && (obj.tag == PosTag::Noun) && verb.verb?
+            # Check for implicit SOV.
+            # "Ta Hanyu Shuo".
+            # Swap Obj+Verb -> Verb+Obj.
+
+            # Need to be careful not to break "Adj + Noun" or "Noun + Noun" compounds.
+            # But "Hanyu Shuo" (Chinese Speak) -> "Speak Chinese".
+            # Output: [Subj] [Verb] [Obj]
+
+            # We consume Subj, Obj, Verb.
+            # Create Phrase? No, just reordered stream.
+            new_nodes << subj
+            new_nodes << verb
+            new_nodes << obj
+
+            i += 3
+            next
+          end
+        end
+
         # 0. Time + Verb Reordering
         # Also Time + Subject -> Subject + Time
 
