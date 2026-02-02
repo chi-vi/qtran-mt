@@ -211,3 +211,250 @@
     做: làm
     。: "."
   expected: phàm là mọi việc đều cần tự mình làm .
+- id: random_yuanqingsu
+  desc: 'Random: Yuanqingsu scene'
+  input: 源清素正想着，换好衣服的神林御子，已经从旅馆的木门走出来。
+  ltp:
+    cws:
+    - 源清素
+    - 正
+    - 想着
+    - ，
+    - 换好
+    - 衣服
+    - 的
+    - 神林御子
+    - ，
+    - 已经
+    - 从
+    - 旅馆
+    - 的
+    - 木门
+    - 走出来
+    - 。
+    pos:
+    - nh
+    - d
+    - v
+    - wp
+    - v
+    - n
+    - u
+    - nh
+    - wp
+    - d
+    - p
+    - n
+    - u
+    - n
+    - v
+    - wp
+  dict:
+    源清素: Nguyên Thanh Tố
+    正: đang
+    想着: suy nghĩ
+    ，: ","
+    换好: thay xong
+    衣服: quần áo
+    的: ""
+    神林御子: Thần Lâm Ngự Tử
+    已经: đã
+    从: từ
+    旅馆: quán trọ
+    木门: cửa gỗ
+    走出来: bước ra
+    。: "."
+  expected: Nguyên Thanh Tố đang suy nghĩ, Thần Lâm Ngự Tử thay xong quần áo đã từ cửa gỗ quán trọ bước ra.
+- id: random_roadside_stall
+  desc: 'Random: Roadside stall scene'
+  input: 两人到了小区外的路边摊，不吃扁肉了，整了点烤串，各自要了一瓶啤酒。
+  ltp:
+    cws:
+    - 两人
+    - 到
+    - 了
+    - 小区
+    - 外
+    - 的
+    - 路边摊
+    - ，
+    - 不
+    - 吃
+    - 扁肉
+    - 了
+    - ，
+    - 整
+    - 了
+    - 点
+    - 烤串
+    - ，
+    - 各自
+    - 要
+    - 了
+    - 一
+    - 瓶
+    - 啤酒
+    - 。
+    pos:
+    - n
+    - v
+    - u
+    - n
+    - nd
+    - u
+    - n
+    - wp
+    - d
+    - v
+    - n
+    - u
+    - wp
+    - v
+    - u
+    - q
+    - n
+    - wp
+    - r
+    - v
+    - u
+    - m
+    - q
+    - n
+    - wp
+  dict:
+    两人: hai người
+    到: đến
+    了: rồi
+    小区: tiểu khu
+    外: ngoài
+    的: ""
+    路边摊: quán vỉa hè
+    不: không
+    吃: ăn
+    扁肉: hoành thánh
+    整: gọi
+    点: chút
+    烤串: thịt xiên nướng
+    各自: mỗi người
+    要: gọi
+    一: một
+    瓶: chai
+    啤酒: bia
+    。: "."
+    ，: ","
+  expected: hai người đã đến quán vỉa hè ngoài tiểu khu, không ăn hoành thánh rồi, đã gọi chút thịt xiên nướng, mỗi người đã gọi một chai bia.
+- id: random_collector_raid
+  desc: 'Random: Collector raid scene'
+  input: 三十五天前，清洁协会十二骑士之一的‘收藏家’突袭东南亚降临会曼谷总会，当场毙杀三十五名降灵师，包括七名异常附体的大降灵师，头颅全无……
+  ltp:
+    cws:
+    - 三十五
+    - 天
+    - 前
+    - ，
+    - 清洁
+    - 协会
+    - 十二
+    - 骑士
+    - 之
+    - 一
+    - 的
+    - ‘
+    - 收藏家
+    - ’
+    - 突袭
+    - 东南亚
+    - 降临会
+    - 曼谷
+    - 总会
+    - ，
+    - 当场
+    - 毙杀
+    - 三十五
+    - 名
+    - 降灵师
+    - ，
+    - 包括
+    - 七
+    - 名
+    - 异常
+    - 附体
+    - 的
+    - 大
+    - 降灵师
+    - ，
+    - 头颅
+    - 全无
+    - ……
+    pos:
+    - m
+    - q
+    - nd
+    - wp
+    - a
+    - n
+    - m
+    - n
+    - u
+    - m
+    - u
+    - wp
+    - n
+    - wp
+    - v
+    - ns
+    - ni
+    - ns
+    - n
+    - wp
+    - d
+    - v
+    - m
+    - q
+    - n
+    - wp
+    - v
+    - m
+    - q
+    - a
+    - v
+    - u
+    - a
+    - n
+    - wp
+    - n
+    - v
+    - wp
+  dict:
+    三十五: ba mươi lăm
+    天: ngày
+    前: trước
+    清洁: làm sạch
+    协会: hiệp hội
+    十二: mười hai
+    骑士: kỵ sĩ
+    之: trong
+    一: một
+    的: ""
+    ‘: "'"
+    收藏家: nhà sưu tập
+    ’: "'"
+    突袭: đột kích
+    东南亚: Đông Nam Á
+    降临会: Giáng Lâm Hội
+    曼谷: Bangkok
+    总会: tổng hội
+    当场: tại chỗ
+    毙杀: giết chết
+    名: người
+    降灵师: hàng linh sư
+    包括: bao gồm
+    七: bảy
+    异常: dị thường
+    附体: nhập xác
+    大: đại
+    头颅: đầu lâu
+    全无: không còn gì
+    ，: ","
+    ……: "..."
+  expected: ba mươi lăm ngày trước, nhà sưu tập một trong mười hai kỵ sĩ của hiệp hội làm sạch đột kích tổng hội Bangkok Giáng Lâm Hội Đông Nam Á, tại chỗ giết chết ba mươi lăm người hàng linh sư, bao gồm bảy người đại hàng linh sư nhập xác dị thường, đầu lâu không còn gì...
