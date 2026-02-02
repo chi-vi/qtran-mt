@@ -1,0 +1,57 @@
+---
+- id: debug_simple_loc
+  desc: 'Debug: He at home play'
+  input: 他在家里玩
+  ltp:
+    cws:
+    - 他
+    - 在
+    - 家里
+    - 玩
+    pos:
+    - r
+    - p
+    - nl
+    - v
+  dict:
+    他: anh ấy
+    在: ở
+    家里: trong nhà
+    玩: chơi
+  expected: anh ấy chơi ở trong nhà
+
+- id: debug_zui
+  desc: 'Debug: Zui Kuaile'
+  input: 最快乐
+  ltp:
+    cws:
+    - 最
+    - 快乐
+    pos:
+    - d
+    - a
+  dict:
+    最: nhất
+    快乐: vui vẻ
+  expected: vui vẻ nhất
+
+- id: debug_manner_zui
+  desc: 'Debug: Zui Kuaile De Wan'
+  input: 最快乐地玩
+  ltp:
+    cws:
+    - 最
+    - 快乐
+    - 地
+    - 玩
+    pos:
+    - d
+    - a
+    - u
+    - v
+  dict:
+    最: nhất
+    快乐: vui vẻ
+    地: mà
+    玩: chơi
+  expected: chơi vui vẻ nhất

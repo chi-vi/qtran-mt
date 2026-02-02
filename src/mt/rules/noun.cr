@@ -55,7 +55,8 @@ module QTran
 
               # Check modifier validity
               if modifier.noun? || modifier.verb? || modifier.adj? || modifier.pronoun?
-                parent = MtNode.new("", PosTag::Noun) # Generic Noun Phrase
+                # Inherit head tag (Verb/Noun) instead of hardcoding Noun
+                parent = MtNode.new("", n2.tag)
 
                 de_val = ""
 

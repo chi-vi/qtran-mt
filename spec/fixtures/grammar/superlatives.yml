@@ -1,0 +1,146 @@
+---
+- id: super_zui_basic
+  desc: 'Superlative Zui: Best'
+  input: 最好的书
+  ltp:
+    cws:
+    - 最
+    - 好
+    - 的
+    - 书
+    pos:
+    - d
+    - a
+    - u
+    - n
+  dict:
+    最: nhất
+    好: tốt
+    的: mà
+    书: sách
+  expected: sách tốt nhất
+
+- id: super_zuigao_measure
+  desc: 'Superlative ZuiGao + Measure: Highest building'
+  input: 最高的楼
+  ltp:
+    cws:
+    - 最
+    - 高
+    - 的
+    - 楼
+    pos:
+    - d
+    - a
+    - u
+    - n
+  dict:
+    最: nhất
+    高: cao
+    的: mà
+    楼: tòa nhà
+  expected: tòa nhà cao nhất
+
+- id: super_dingji_attr
+  desc: 'Superlative Dingji (Top Level): Top level configuration'
+  input: 顶级的配置
+  ltp:
+    cws:
+    - 顶级
+    - 的
+    - 配置
+    pos:
+    - b
+    - u
+    - n
+  dict:
+    顶级: hàng đầu
+    的: mà
+    配置: cấu hình
+  expected: cấu hình hàng đầu
+
+- id: super_jile_post
+  desc: 'Superlative Jile (Post-posed): Happy extremely'
+  input: 高兴极了
+  ltp:
+    cws:
+    - 高兴
+    - 极了
+    pos:
+    - a
+    - u
+  dict:
+    高兴: vui vẻ
+    极: cực
+    了: rồi
+    极了: hết sức
+  expected: vui vẻ hết sức
+
+- id: super_complex_manner_loc
+  desc: 'Complex: He at home most happily played'
+  input: 他在家里最快乐地玩了
+  ltp:
+    cws:
+    - 他
+    - 在
+    - 家里
+    - 最
+    - 快乐
+    - 地
+    - 玩
+    - 了
+    pos:
+    - r
+    - p
+    - nl
+    - d
+    - a
+    - u
+    - v
+    - u
+  dict:
+    他: anh ấy
+    在: ở
+    家里: trong nhà
+    最: nhất
+    快乐: vui vẻ
+    地: mà
+    玩: chơi
+    了: rồi
+  expected: anh ấy chơi vui vẻ nhất ở trong nhà rồi
+
+- id: super_complex_obj
+  desc: 'Complex: He at school bought best book'
+  input: 他在学校买了最好的书
+  ltp:
+    cws:
+    - 他
+    - 在
+    - 学校
+    - 买
+    - 了
+    - 最
+    - 好
+    - 的
+    - 书
+    pos:
+    - r
+    - p
+    - n
+    - v
+    - u
+    - d
+    - a
+    - u
+    - n
+  dict:
+    他: anh ấy
+    在: ở
+    学校: trường
+    买: mua
+    了: đã
+    最: nhất
+    好: tốt
+    的: mà
+    书: sách
+  expected: anh ấy đã mua sách tốt nhất ở trường
